@@ -12,6 +12,7 @@ description_en: >
   identifiers from Office template metadata, and validates the required SKILL.md display-name and
   description fields.
 description: "将某个 WorkBuddy skill 目录打包为可分发 zip，并在打包前执行安全审计——扫描并拦截硬编码的真实 API key / token，发现个人环境路径（用户名、云盘同步目录、密钥文件、managed Python 路径等）则提示泛化。触发词：打包 skill / 压缩 skill / 把 skill 做成包 / package a skill / skill 发布包 / 分发 skill / 打包前安全审计 / 检查 skill 里有没有密钥。仅在用户明确要求打包、压缩、发布或分发一个 skill 文件夹时使用。"
+version: 1.0.0
 agent_created: true
 ---
 

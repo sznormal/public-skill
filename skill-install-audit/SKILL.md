@@ -1,5 +1,6 @@
 ---
 name: skill-install-audit
+version: 1.0.0
 agent_created: true
 description: 从本地 .zip 或 GitHub 仓库安全安装 WorkBuddy skill 的标准流程——先做安全审计（P0/P1/P2 分级），再安装到用户级 skills 目录。当用户说"安装这个skill""装一下这个技能""从 GitHub 装 skill"或提供 .zip / 仓库 URL 时使用。本机实测：skills-security-check 技能未安装，需走本文件手动审计。
 ---

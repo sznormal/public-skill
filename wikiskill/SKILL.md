@@ -9,6 +9,7 @@ description: >
                   建立技能进化工作区
   【触发隔离】：一次性写完的普通 skill、单纯文档整理、日常聊天不触发。
                本 skill 针对的是"有可量化验证集、需要多轮迭代"的技能打磨场景。
+version: 1.0.0
 agent_created: true
 partner: norma
 skill_type: independent

@@ -1,6 +1,7 @@
 ---
 name: dashi-ppt-cn
 description: 中文教材章节 → 可编辑 PPTX 的优化版技能。封装 dashi-ppt 引擎并固化 theme09 的三处阻塞绕过方案（maxH 校验缺陷、process/breakdown 6 条上限、comparison 导出 4N 页与 v1-v3 英文泄漏）。触发词：教材 PPT、教材章节 PPT、教材文字转可编辑 PPTX、课程 PPT、教学课件、课件制作、dashi-ppt 教材优化版。
+version: 1.0.0
 ---
 
 # dashi-ppt-cn（教材章节 PPT 优化版）

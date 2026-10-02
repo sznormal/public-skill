@@ -2,6 +2,7 @@
 name: llm-wiki-ingest
 description: >
   LLM Wiki 自动知识库维护技能。每次对话中产生的**任何新文件**（Write 操作生成的 .md/.py/.html/.json 等）或**用户上传的文件**（PDF/图片/文档等），都必须自动将内容摄入到位于 D 盘的 Obsidian-based 个人知识库（LLM Wiki）中。这是强制行为，不是可选操作。也支持用户手动说 ingest、记录到 wiki、加入知识库。执行 Ingest（摄入）、Query（查询）、Lint（健康检查）三种工作流。
+version: 1.0.0
 agent_created: true
 ---
 

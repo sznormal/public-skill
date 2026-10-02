@@ -1,6 +1,7 @@
 ---
 name: wechat-d2-concept
 description: 写"一文读懂 N 个术语"的公众号概念辨析型(D2)爆款文章。当用户要写知识科普/概念对比类公众号文章（涵盖多个易混术语，如 MCP/Skill/Harness/Agent、RAG/微调/Prompt、ROS1/ROS2、RTT/FreeRTOS 等）时使用。基于"AI理工派"已验证爆款配方（单篇 11,507 阅读 / 19.94% 转发率）。
+version: 1.0.0
 ---
 
 # D2 概念辨析型公众号文章模板（一文读懂 N 术语）

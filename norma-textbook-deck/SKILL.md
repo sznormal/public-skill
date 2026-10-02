@@ -20,6 +20,7 @@ description: >
               **产出纯本地可编辑 PPTX（dashi 引擎、theme09）→ dashi-ppt-cn**。
               用户明确点名 dashi / 可编辑 pptx 时，让位给 dashi-ppt-cn。
               与前身 `textbook-deck-dark-blue` 为同一课程体系的新旧两版，本 skill 为 AFP 化正式版。
+version: 1.0.0
 agent_created: true
 partner: norma
 skill_type: independent

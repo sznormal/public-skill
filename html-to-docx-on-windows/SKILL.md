@@ -1,6 +1,7 @@
 ---
 name: html-to-docx-on-windows
 description: 在 Windows 上让 tencent-docx 插件的 HTML→DOCX 转换跑通。当 setup-html-to-docx.sh 报 exit=2、提示 "Installing html-to-docx dependencies" 后失败，或 $HOME/.venv-html-to-docx 建完就消失、被建到 D:\c\Users\... 时使用。触发场景：调用 html_to_docx convert、S3 doc-converter、导出 Word 版交付物、tencent-docx 流水线在 Windows 卡在环境准备。
+version: 1.0.0
 agent_created: true
 ---
 

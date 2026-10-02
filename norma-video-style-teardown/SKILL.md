@@ -1,6 +1,7 @@
 ---
 name: norma-video-style-teardown
 description: 拆解一支参考视频的「结构 / 风格 / 渲染 / 动画转场 / 文案」，产出可直接套拍的复刻规格。当用户上传或指向一个视频文件（.mp4/.mov/.mkv 等）并说「分析这个视频的风格」「拆解结构」「我要套用这个风格做视频」「拉片」时使用。不依赖 ffmpeg——用 OpenCV(自带解码)抽帧、PyAV 取音频、faster-whisper 本地转写。
+version: 1.0.0
 agent_created: true
 ---
 

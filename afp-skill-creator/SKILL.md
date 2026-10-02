@@ -14,6 +14,7 @@ description: >
   【触发隔离】：只在用户明确表达"要创建/做/写/开发/贡献/设计一个 skill"意图时触发。
               用户使用现有 skill 完成任务、询问某个 skill 用法、做非 skill 开发的其他工作时，
               **本 skill 不触发**。
+version: 0.4.0
 agent_created: true
 ---
 

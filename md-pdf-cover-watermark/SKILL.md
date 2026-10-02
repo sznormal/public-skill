@@ -1,6 +1,7 @@
 ---
 name: md-pdf-cover-watermark
 description: 把 Markdown 批量转成「带封面 + 全页水印 + 页码」的 A4 PDF（中文教材/讲义/报告场景）。当用户提出"给这几章 md 加封面导出 PDF""PDF 要加水印""第 X-Y 章做成 PDF""每章配一个封面"等需求时使用。内含纯标准库 CDP 打印方案（不依赖 playwright/puppeteer）、mermaid 图自动渲染与缩放、封面/水印模板，以及交付验收脚本。
+version: 1.0.0
 agent_created: true
 ---
 

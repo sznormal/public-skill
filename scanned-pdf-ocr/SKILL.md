@@ -1,6 +1,7 @@
 ---
 name: scanned-pdf-ocr
 description: 读取扫描件 PDF（无文字层的图片型 PDF）并提取全文。当 Read 读 PDF 超限、pdfplumber/fitz 抽文本几乎为空、或 Read 读图片被过滤（模型不支持读图）时使用。触发场景：通知/公文/合同/教材/论文的扫描版 PDF 需要提取内容、核对表格数字、整理要点。含本地 RapidOCR 方案、表格数字的可靠性与"何时该直接问用户"的判据。
+version: 1.0.0
 agent_created: true
 ---
 

@@ -309,12 +309,19 @@ class DocumentExtractor:
 
 
 def main():
-    """Command line interface for testing"""
-    if len(sys.argv) != 2:
-        print("Usage: python document_extractor.py <file_path>")
+    """Command line interface"""
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python document_extractor.py <file_path> [output_json]")
         sys.exit(1)
 
     file_path = sys.argv[1]
+    # Optional second arg lets run_pipeline.py specify the output path.
+    # Default keeps backward-compatible behavior: <file_path>.extraction.json
+    if len(sys.argv) == 3:
+        output_path = sys.argv[2]
+    else:
+        output_path = file_path + '.extraction.json'
+
     extractor = DocumentExtractor()
 
     try:
@@ -322,7 +329,6 @@ def main():
         extractor.print_summary(result)
 
         # Save to JSON
-        output_path = file_path + '.extraction.json'
         extractor.save_extraction(result, output_path)
         print(f"\nExtraction saved to: {output_path}")
 

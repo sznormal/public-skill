@@ -2,6 +2,8 @@
 
 Minimum Viable Product for automated SSCI journal selection.
 
+> **v1.1.0 — 用户确认前置**：本流程在**生成论文指纹后立即暂停**（Gate G1），让用户先核对/修正指纹；候选池生成后再暂停一次（Gate G2）让用户增删。**确认后才继续**，避免错误指纹污染后续全部步骤。可用 `--mode fingerprint` 只跑到指纹，核对修正后再 `--mode candidates` 继续。
+
 ## Quick Start (5 Steps)
 
 ### Step 1: Extract Paper Information
@@ -10,11 +12,17 @@ python scripts/document_extractor.py your_paper.pdf
 ```
 Output: `your_paper.pdf.extraction.json`
 
+### Step 1.5: 🛑 Confirm Fingerprint (Gate G1)
+Review the extracted 6-line fingerprint. Correct it if needed (use Prompt 1.2 in `references/prompt-templates.md`). **Do not proceed until confirmed.**
+
 ### Step 2: Build Candidate Journal Pool
 ```bash
 python scripts/journal_candidate_builder.py your_paper.pdf.extraction.json
 ```
 Output: `your_paper.pdf.candidates.json`
+
+### Step 2.5: 🛑 Confirm Candidate Pool (Gate G2)
+Add/remove candidate journals before evaluation.
 
 ### Step 3: Generate Excel Evaluation Table
 ```bash
@@ -55,11 +63,21 @@ Upload Paper (PDF/DOCX/TXT)
         ↓
 [document_extractor.py]
         ↓
-Paper Extraction JSON
+Paper Extraction JSON (6-line fingerprint)
+        ↓
+   ╔══════════════════╗
+   ║ 🛑 GATE G1        ║  ← 用户核对/修正指纹（Prompt 1.2）
+   ║ Confirm Fingerprint║     未确认不得继续
+   ╚══════════════════╝
         ↓
 [journal_candidate_builder.py]
         ↓
 Candidate Journals JSON
+        ↓
+   ╔══════════════════╗
+   ║ 🛑 GATE G2        ║  ← 用户增删候选刊
+   ║ Confirm Candidates ║     确认后才评估
+   ╚══════════════════╝
         ↓
 [excel_generator.py] + [report_generator.py]
         ↓
@@ -78,9 +96,15 @@ Complete Journal Evaluation
 python scripts/document_extractor.py research_paper.pdf
 # Output: Document extraction summary + JSON file
 
+# 🛑 GATE G1: Review the 6-line fingerprint; correct if needed
+#   (edit the .extraction.json, or use Prompt 1.2 with your LLM)
+#   Confirm before continuing!
+
 # Step 2: Build candidates
 python scripts/journal_candidate_builder.py research_paper.pdf.extraction.json
 # Output: Top journals from references + JSON file
+
+# 🛑 GATE G2: Review candidate list; remove journals you won't target
 
 # Step 3: Generate Excel
 python scripts/excel_generator.py research_paper.pdf.candidates.json
@@ -202,10 +226,12 @@ pip install PyPDF2 pdfplumber python-docx chardet
 ## What's NOT in MVP (Coming Later)
 
 - Automatic journal metadata fetching (IF, quartile, scope)
-- LLM-based automatic matching evaluation
-- Cover letter generator script
+- LLM-based automatic matching evaluation — ⚠️ `match_evaluator.py` is referenced in SKILL.md but **not yet implemented**; use `references/prompt-templates.md` (Prompt 3.1/3.2) with LLM assistance
+- Cover letter generator script — ⚠️ `cover_letter_generator.py` is referenced in SKILL.md but **not yet implemented**; use Prompt 5.1/5.2 manually
 - Advanced Excel formatting with formulas
 - Keyword-based journal search (in addition to citation backtracking)
+
+> **v1.1.0 note**: Step 3 (scoring) and Step 5 (cover letter) are LLM-assisted manual steps by design. The confirmation gates (G1/G2) intentionally keep the user in the loop early, so the pipeline does NOT run fully unattended end-to-end.
 
 ## Getting Help
 

@@ -1,8 +1,8 @@
 ---
 name: ssci-journal-selector
-version: 1.0.0
+version: 1.1.0
 agent_created: true
-description: Comprehensive SSCI journal selection skill that helps researchers select appropriate journals for their papers. Implements a 6-step evidence-based process including paper fingerprint generation, candidate journal pool building, 3D matching score evaluation (Topic/Method/Audience), and submission sequence design. Supports multiple document formats (PDF/DOCX/TXT) and generates Excel evaluation tables, Markdown reports, and cover letter drafts. Use when users ask for "help me select SSCI journals", "journal recommendation", "where should I submit my paper", or similar journal selection requests.
+description: Comprehensive SSCI journal selection skill that helps researchers select appropriate journals for their papers. Implements a 6-step evidence-based process with EARLY USER CONFIRMATION GATES - paper fingerprint must be reviewed and corrected by the user (Gate G1) before any candidate journal pool is built, and the candidate pool must be confirmed (Gate G2) before evaluation. Supports multiple document formats (PDF/DOCX/TXT) and generates Excel evaluation tables, Markdown reports, and cover letter drafts. Use when users ask for "help me select SSCI journals", "journal recommendation", "where should I submit my paper", or similar journal selection requests.
 ---
 
 # SSCI Journal Selector
@@ -22,13 +22,16 @@ This skill implements a comprehensive 6-step evidence-based process for selectin
 
 ## Quick Start
 
+> **核心原则（v1.1.0）**：**用户的确认与修正优先于自动化。** 论文指纹（fingerprint）是整个流程的地基——它错了，后面的候选池、评分、投稿建议全部错位。因此流程在**生成指纹后立刻停下**，先让用户核对/修正指纹，确认无误后才继续建候选池。
+
 ### Automated Analysis (Recommended)
 
 1. Upload your paper (PDF/DOCX/TXT)
 2. Say: "Help me select SSCI journals"
 3. The skill will:
-   - Extract paper information automatically
-   - Build candidate journal pool
+   - Extract paper information automatically → **生成论文指纹**
+   - **🛑 停下来：请用户核对/修正指纹（Gate G1）** ← 用户确认后才继续
+   - Build candidate journal pool → **🛑 候选池确认（Gate G2）**
    - Evaluate matching scores
    - Generate submission sequence
    - Provide Excel table, report, and cover letter
@@ -38,13 +41,24 @@ This skill implements a comprehensive 6-step evidence-based process for selectin
 1. Say: "Guide me through journal selection"
 2. Follow step-by-step prompts for:
    - Step 0: Build personal constraint profile
-   - Step 1: Generate paper fingerprint
-   - Step 2: Build candidate journal pool
+   - Step 1: Generate paper fingerprint → **Gate G1：用户确认/修正指纹**
+   - Step 2: Build candidate journal pool → **Gate G2：用户增删候选**
    - Step 3: Evidence-based evaluation
    - Step 4: Design submission sequence
    - Step 5: Write journal alignment statement
 
 ## The 6-Step Process
+
+> **确认闸门（Confirmation Gates）说明 —— v1.1.0 核心改动**
+>
+> 本流程在两个关键节点**强制暂停**，等待用户确认后才继续：
+>
+> | 闸门 | 位置 | 用户要做什么 | 未确认的后果 |
+> |---|---|---|---|
+> | **🛑 Gate G1** | Step 1 生成指纹**之后**、Step 2 建候选池**之前** | 核对指纹是否贴合论文；用 `prompt-templates.md` 的 **Prompt 1.2** 修正赛道/核心问题/方法/贡献/MUST-HAVE/DEAL-BREAKER | 指纹错 → 候选池、评分、投稿建议全部错位 |
+> | **🛑 Gate G2** | Step 2 建候选池**之后**、Step 3 评估**之前** | 增删候选刊；剔除不投的、补想投的 | 缺真实候选 → 评估与梯度失真 |
+>
+> **G1 是硬门槛**：指纹未经用户确认，**不得进入 Step 2**。这与 SCI 选刊的 AFP 闸门逻辑一致——把纠错成本最低的环节放在最前面。
 
 ### Step 0: Personal Constraint Profile
 Build your research profile:
@@ -63,11 +77,22 @@ Extract 6 key elements:
 5. **MUST-HAVE**: 3-5 essential journal characteristics
 6. **DEAL-BREAKER**: 3-5 absolute exclusion criteria
 
+可用 `references/prompt-templates.md` 的 **Prompt 1.1** 自动生成。
+
+**🛑 Gate G1（强制暂停 · 硬门槛）**：生成指纹后**立刻停下**，请用户核对：
+- 展示完整 6 行指纹，问："这些判断准确吗？赛道、核心问题、方法有没有我识别错的？"
+- 用户修正时用 **Prompt 1.2**（Refine Paper Fingerprint）迭代，**以用户判断为准**。
+- **用户未确认前，不得进入 Step 2。** 指纹是全流程地基，错则全盘皆错。
+
 ### Step 2: Candidate Journal Pool
 Build 8-20 candidate journals using:
 - **Citation Backtracking**: Analyze your paper's reference list
 - **Keyword Search**: Use academic databases (Web of Science, Scopus)
 - **Merge and Rank**: Combine both approaches, remove duplicates
+
+**🛑 Gate G2（强制暂停）**：候选池生成后停下，请用户增删：
+- 展示候选清单，问："有没有你听过想加的、或明确不投的？"
+- 用户确认后再进入 Step 3 评估。
 
 ### Step 3: Evidence-Based Evaluation
 For each journal, evaluate:
@@ -195,10 +220,18 @@ Claude: [Opens references/matching-score-template.md with detailed rubrics]
 
 ## Risk Mitigation
 
+- **Early Human Confirmation (v1.1.0)**: Confirmation gates (G1 after fingerprint, G2 after candidate pool) let the user correct errors at the cheapest point—before downstream steps build on them
 - **Human Verification Required**: All outputs include disclaimers about manual verification
 - **Multiple Data Sources**: Cross-check journals against real databases
 - **Graceful Degradation**: Fallback to manual methods when APIs fail
 - **Evidence-Based**: Require concrete evidence for high matching scores
+
+## Known Limitations (v1.1.0)
+
+- **Fingerprint accuracy depends on extraction quality**: scanned PDFs (no text layer) produce poor fingerprints—consider `--mode fingerprint` review before proceeding
+- **Candidate pool from citation backtracking is reference-biased**: it reflects where you already cite, not all viable venues; broaden with keyword search
+- **No automated journal metadata fetching**: IF/quartile/APC must be verified manually against real databases
+- **Step 3 scoring and Step 5 cover letter are not yet automated**: `match_evaluator.py` and `cover_letter_generator.py` are documented but not implemented; use `prompt-templates.md` with LLM assistance
 
 ## Success Metrics
 

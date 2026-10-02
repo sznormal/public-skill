@@ -89,8 +89,8 @@ def main():
     """Test with candidates file"""
     import sys
 
-    if len(sys.argv) != 2:
-        print("Usage: python excel_generator.py <candidates.json>")
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python excel_generator.py <candidates.json> [output_evaluation.csv]")
         print("  where candidates.json is output from journal_candidate_builder.py")
         sys.exit(1)
 
@@ -100,8 +100,11 @@ def main():
     generator = ExcelGenerator()
     csv_content = generator.generate_from_candidates_file(candidates_file)
 
-    # Save to file
-    output_file = candidates_file.replace('.candidates.json', '_evaluation.csv')
+    # Save to file — optional 2nd arg lets run_pipeline.py specify the output path.
+    if len(sys.argv) == 3:
+        output_file = sys.argv[2]
+    else:
+        output_file = candidates_file.replace('.candidates.json', '_evaluation.csv')
     generator.save_csv(csv_content, output_file)
 
     print("\n" + "="*60)

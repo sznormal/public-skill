@@ -68,13 +68,20 @@ def run_pipeline(document_path: str, output_dir: str = None, mode: str = "full")
     Args:
         document_path: Path to PDF/DOCX/TXT file
         output_dir: Output directory (default: same as input file)
-        mode: Pipeline mode ("full", "fingerprint", "candidates", "evaluation")
+        mode: Pipeline mode ("full", "fingerprint", "candidates", "evaluation", "auto")
     """
     print("\n" + "="*70)
     print("SSCI JOURNAL SELECTOR - MVP PIPELINE")
     print("="*70)
     print(f"\nInput document: {document_path}")
     print(f"Mode: {mode}")
+
+    if mode == "full":
+        print("\n" + "!"*70)
+        print("NOTICE: 'full' mode now STOPS after fingerprint extraction (Gate G1).")
+        print("Review and confirm the 6-line fingerprint before building candidates.")
+        print("After confirming, re-run with --mode candidates (or 'auto' to finish).")
+        print("!"*70 + "\n")
 
     # Validate input file
     if not validate_file(document_path):
@@ -97,16 +104,19 @@ def run_pipeline(document_path: str, output_dir: str = None, mode: str = "full")
         # Step 1: Extract document (if needed)
         extraction_json = output_dir / f"{Path(document_path).stem}_extraction.json"
 
-        if mode in ["full", "fingerprint"]:
+        if mode in ["full", "fingerprint", "candidates", "evaluation", "auto"]:
             success, msg = run_step("1", script_dir / "document_extractor.py", document_path, str(extraction_json))
             if not success:
                 return False
             generated_files.append(extraction_json)
 
-        # Step 2: Build candidate pool (if needed)
+        # 🛑 Gate G1: 'full' mode stops here so the user can review/confirm the
+        # 6-line fingerprint before any downstream step builds on it.
+
+        # Step 2: Build candidate pool (skip in 'full' mode — gated at G1)
         candidates_json = output_dir / f"{Path(document_path).stem}_candidates.json"
 
-        if mode in ["full", "candidates"]:
+        if mode in ["candidates", "evaluation", "auto"]:
             if not extraction_json.exists():
                 print("❌ Extraction file not found for candidate building")
                 return False
@@ -119,7 +129,7 @@ def run_pipeline(document_path: str, output_dir: str = None, mode: str = "full")
         # Step 3: Generate Excel evaluation table (if needed)
         excel_file = output_dir / f"{Path(document_path).stem}_evaluation.csv"
 
-        if mode in ["full", "evaluation"]:
+        if mode in ["evaluation", "auto"]:
             if not candidates_json.exists():
                 print("❌ Candidates file not found for evaluation")
                 return False
@@ -132,7 +142,7 @@ def run_pipeline(document_path: str, output_dir: str = None, mode: str = "full")
         # Step 4: Generate comprehensive report (if needed)
         report_file = output_dir / f"{Path(document_path).stem}_report.md"
 
-        if mode in ["full", "evaluation"]:
+        if mode in ["evaluation", "auto"]:
             if not (extraction_json.exists() and candidates_json.exists()):
                 print("❌ Required files not found for report generation")
                 return False
@@ -153,15 +163,21 @@ def run_pipeline(document_path: str, output_dir: str = None, mode: str = "full")
 
         print("\nNext steps:")
         if mode == "full":
+            print("  🛑 GATE G1: Review the 6-line fingerprint in the extraction JSON")
+            print("     1. Correct it if needed (edit JSON or use Prompt 1.2 with your LLM)")
+            print("     2. Confirm the fingerprint is accurate")
+            print("  🔄 Then run: --mode candidates  (or --mode auto to finish end-to-end)")
+        elif mode == "auto":
             print("  1. 📊 Open the Excel CSV file to review journal candidates")
             print("  2. 📝 Read the Markdown report for detailed analysis")
             print("  3. 🔍 Use LLM prompts for detailed journal evaluation")
             print("  4. 📋 Design your 3-tier submission strategy")
+            print("  ⚠️  'auto' assumes the fingerprint was ALREADY confirmed (G1) and the candidate pool reviewed (G2)")
         elif mode == "fingerprint":
             print("  1. 📄 Review extracted paper fingerprint")
             print("  2. 🔄 Run with --mode candidates to build journal pool")
         elif mode == "candidates":
-            print("  1. 📊 Review candidate journals")
+            print("  1. 📊 Review candidate journals (Gate G2: add/remove before evaluation)")
             print("  2. 🔄 Run with --mode evaluation for full analysis")
         elif mode == "evaluation":
             print("  1. 📈 Review evaluation table and report")
@@ -199,24 +215,26 @@ def interactive_mode():
 
     # Choose mode
     print("\n🔧 Choose analysis mode:")
-    print("  1. Full analysis (recommended for new papers)")
+    print("  1. Full analysis (extract + fingerprint, then STOP for Gate G1 confirmation)")
     print("  2. Fingerprint only (extract paper characteristics)")
     print("  3. Build candidates (from existing fingerprint)")
     print("  4. Generate evaluation (from existing candidates)")
+    print("  5. Auto finish (assumes fingerprint/candidates already confirmed)")
 
     mode_map = {
         "1": "full",
         "2": "fingerprint",
         "3": "candidates",
-        "4": "evaluation"
+        "4": "evaluation",
+        "5": "auto"
     }
 
     while True:
-        choice = input("\nEnter choice (1-4): ").strip()
+        choice = input("\nEnter choice (1-5): ").strip()
         if choice in mode_map:
             mode = mode_map[choice]
             break
-        print("Please enter 1, 2, 3, or 4")
+        print("Please enter 1, 2, 3, 4, or 5")
 
     # Get output directory
     output_dir = input("\n📁 Output directory (press Enter for current directory): ").strip()
@@ -233,11 +251,17 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Full analysis
+  # Full analysis (extract + fingerprint, then STOP at Gate G1 for confirmation)
   python run_pipeline.py paper.pdf
 
   # Specific mode
   python run_pipeline.py paper.pdf --mode fingerprint
+
+  # After confirming the fingerprint (Gate G1), build candidates
+  python run_pipeline.py paper.pdf --mode candidates
+
+  # After reviewing candidates (Gate G2), finish end-to-end
+  python run_pipeline.py paper.pdf --mode auto
 
   # Custom output directory
   python run_pipeline.py paper.pdf --output results/
@@ -258,9 +282,9 @@ Examples:
 
     parser.add_argument(
         "--mode",
-        choices=["full", "fingerprint", "candidates", "evaluation"],
+        choices=["full", "fingerprint", "candidates", "evaluation", "auto"],
         default="full",
-        help="Pipeline mode (default: full)"
+        help="Pipeline mode (default: full — stops at Gate G1 for fingerprint confirmation)"
     )
 
     parser.add_argument(
@@ -279,7 +303,7 @@ Examples:
     parser.add_argument(
         "--version",
         action="version",
-        version="SSCI Journal Selector v1.0"
+        version="SSCI Journal Selector v1.1.0 (confirmation gates G1/G2)"
     )
 
     args = parser.parse_args()

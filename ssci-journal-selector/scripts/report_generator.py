@@ -206,8 +206,13 @@ def main():
     generator = ReportGenerator()
     report = generator.generate_from_files(extraction_file, candidates_file, constraints_file)
 
-    # Save report
-    output_file = candidates_file.replace('.candidates.json', '_report.md')
+    # Save report — derive _report.md path robustly (candidates file may be
+    # named paper_candidates.json OR paper.extraction.candidates.json).
+    if candidates_file.endswith('.candidates.json'):
+        output_file = candidates_file[:-len('.candidates.json')] + '_report.md'
+    else:
+        stem = candidates_file[:-5] if candidates_file.endswith('.json') else candidates_file
+        output_file = stem + '_report.md'
     generator.save_report(report, output_file)
 
     print("\n" + "="*60)

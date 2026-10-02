@@ -155,8 +155,8 @@ def main():
     """Test with extracted paper data"""
     import sys
 
-    if len(sys.argv) != 2:
-        print("Usage: python journal_candidate_builder.py <paper_extraction.json>")
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python journal_candidate_builder.py <paper_extraction.json> [output_candidates.json]")
         print("  where paper_extraction.json is output from document_extractor.py")
         sys.exit(1)
 
@@ -172,8 +172,11 @@ def main():
     # Print summary
     builder.print_summary(result)
 
-    # Save results
-    output_file = extraction_file.replace('.extraction.json', '.candidates.json')
+    # Save results — optional 2nd arg lets run_pipeline.py specify the output path.
+    if len(sys.argv) == 3:
+        output_file = sys.argv[2]
+    else:
+        output_file = extraction_file.replace('.extraction.json', '.candidates.json')
     builder.save_candidate_pool(result, output_file)
     print(f"\n✅ Candidate pool saved to: {output_file}")
 

@@ -1,0 +1,32 @@
+<slide xmlns="https://www.larkoffice.com/sml/2.0">
+  <style>
+    <fill><fillColor color="linear-gradient(135deg,rgba(8,18,38,1) 0%,rgba(14,40,80,1) 100%)"/></fill>
+  </style>
+  <data>
+    <!-- 小标签 y≈46 -->
+    <shape type="text" topLeftX="80" topLeftY="46" width="700" height="22">
+      <content textType="caption" fontSize="13" bold="true" color="rgba(79,195,247,1)" wrap="true" autoFit="normal-auto-fit" lineSpacing="multiple:1.2"><p>LABEL · 英文小标签</p></content>
+    </shape>
+    <!-- 主标题 y≈70 -->
+    <shape type="text" topLeftX="80" topLeftY="70" width="800" height="46">
+      <content textType="title" fontSize="30" bold="true" color="rgba(255,255,255,1)" wrap="true" autoFit="normal-auto-fit" lineSpacing="multiple:1.1"><p>页面主标题</p></content>
+    </shape>
+    <!-- 导读 y≈120 -->
+    <shape type="text" topLeftX="80" topLeftY="120" width="800" height="28">
+      <content textType="body" fontSize="15" color="rgba(180,196,220,1)" wrap="true" autoFit="normal-auto-fit" lineSpacing="multiple:1.3"><p>一句话导读，承接上一页、引出本页。</p></content>
+    </shape>
+
+    <!-- 主体内容区 y≈156 起，按 design-spec §3 版式模板填充 -->
+
+    <!-- 页脚 y≈494 -->
+    <shape type="text" topLeftX="80" topLeftY="494" width="400" height="18"><content textType="caption" fontSize="11" color="rgba(143,163,196,1)"><p>第N章 · <章名></p></content></shape>
+    <shape type="text" topLeftX="860" topLeftY="494" width="36" height="18"><content textType="caption" fontSize="11" color="rgba(143,163,196,1)" textAlign="right"><p>NN</p></content></shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14" wrap="true" autoFit="normal-auto-fit" lineSpacing="multiple:1.5">
+      <p>讲稿第 1 句：本页开场。</p>
+      <p>讲稿第 2 句：本页核心。</p>
+      <p>讲稿第 3 句：本页收束 / 过渡。</p>
+    </content>
+  </note>
+</slide>

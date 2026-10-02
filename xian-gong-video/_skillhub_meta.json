@@ -1,0 +1,11 @@
+{
+  "name": "云上仙宫视频生成",
+  "installedAt": 1789484270081,
+  "source": "marketplace",
+  "version": "1.0.0",
+  "skillId": "skill_2095951961987903488",
+  "description_zh": "云上仙宫 / 中式天庭 AI 视频生成规则与提示词模板。基于多篇爆款拆解提炼：图片是命门、模型比提示词重要、巨物感靠人物占比 1%–2% 对比。覆盖生图万能公式、21:9 比例、即梦/Seedream/GPT 模型取舍、图生视频四段式提示词、剪映剪辑与特效，并内置反同质化铁律（强制轮换机位/人物/框景/风格加成），避免画面雷同。",
+  "description_en": "AI video prompt rules and templates for Chinese celestial-palace / heavenly-court imagery. Distilled from multiple viral breakdowns. Covers the image-first principle, model > prompt, the 1%-2% figure-scale trick, 21:9 ratio, model trade-offs (Jimeng/Seedream/GPT), four-part image-to-video prompts, and anti-homogenization rules to avoid repetitive frames.",
+  "iconSource": "letter:auto",
+  "installedContentHash": "sha256:1e9aef286fd148e3a9a72b3770386d3f1066e4e0c8707a934300ffb94a701b53"
+}

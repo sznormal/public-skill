@@ -1,0 +1,54 @@
+# Skill 市场发布清单（提交网页端市场时直接抄这里）
+# 客户端左侧"技能市场"只有浏览/安装，发布请走网页端开放平台：open.workbuddy.cn
+# 流程：入驻注册 → 个人认证 → 后台「技能」→ 上传 xian-gong-video.zip → 平台自动解析 SKILL.md
+#       → 补填下方展示信息 → 提交审核（实测约 1–7 个工作日）。
+
+# ===== 以下字段已写进 SKILL.md frontmatter，平台会自动解析，不用手填 =====
+slug: xian-gong-video                 # 市场 URL 标识，小写+连字符，唯一
+display_name: "云上仙宫视频生成"        # 中文展示名（SKILL.md 已有）
+display_name_en: "Celestial Palace Video Generator"
+description_zh: >                      # 中文描述（SKILL.md 已有）
+  云上仙宫 / 中式天庭 AI 视频生成规则与提示词模板。基于多篇爆款拆解提炼：
+  图片是命门、模型比提示词重要、巨物感靠人物占比 1%–2% 对比。覆盖生图万能公式、
+  21:9 比例、即梦/Seedream/GPT 模型取舍、图生视频四段式提示词、剪映剪辑与特效，
+  并内置反同质化铁律（强制轮换机位/人物/框景/风格加成），避免画面雷同。
+description_en: >                     # 英文描述（SKILL.md 已有）
+  AI video prompt rules and templates for Chinese celestial-palace / heavenly-court
+  imagery. Distilled from multiple viral breakdowns. Covers the image-first principle,
+  model > prompt, the 1%-2% figure-scale trick, 21:9 ratio, model trade-offs
+  (Jimeng/Seedream/GPT), four-part image-to-video prompts, and anti-homogenization rules.
+version: 1.0.0
+author: gumiho
+license: MIT
+
+# ===== 以下字段需在网页后台「完善信息」表单手填（平台不从压缩包读取） =====
+# 专业领域（profession，必填，中英文都要）
+profession_zh: "内容创作"
+profession_en: "Content Creation"
+# 默认初始化提示词（用户点开技能后首发的一句话，中英文都要）
+default_init_prompt_zh: "帮我按仙宫模板出一组 21:9 国风仙宫图提示词，主体参考我上传的图片造型"
+default_init_prompt_en: "Generate a set of 21:9 celestial-palace image prompts following the skill template, using my uploaded image as the subject reference"
+# 市场展示分类（网页里下拉选，AI 相关类目藏得深，可试「内容创作 / 效率工具 / 商业服务」）
+category: "内容创作"
+# 图标（压缩包内已含 icon.png，512×512 PNG，上传后也可在表单重传）
+icon: icon.png
+
+# ===== 标签 / 触发词（填表时参考）=====
+tags:
+  - 仙宫图
+  - 国风视频
+  - AI绘画提示词
+  - 视频生成
+  - 中式审美
+  - 多场景生成
+
+triggers:
+  - 仙宫图
+  - 云上天宫
+  - 天庭视频
+  - 中式仙宫
+  - 国风仙宫视频
+  - 仙宫提示词
+  - 一套提示词出多张仙宫
+  - 仙宫图单一
+  - 仙宫画面同质化

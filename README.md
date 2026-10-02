@@ -27,6 +27,7 @@ Norma 的自建 WorkBuddy Skill 集合（单体仓库 / monorepo）。
 | `norma-lit-review` | 0.17.0 | 理工科文献综述全流程：检索策略 → 多库检索 → 筛选分类 → 研究缺口 → 结构化综述 |
 | `sci-journal-selection` | 1.2.0 | SCI 选刊决策七阶段交互流：论文画像 → 期刊偏好 → 竞争格局 → 候选池 → 硬排雷 → 匹配打分 → 冲/稳/保 |
 | `school-news-oa-writer` | — | 按学校 OA 规范生成可直接投稿的 Word 新闻稿（字数分级 + 排版模板 + norma 行文偏好） |
+| `textbook-review` | 1.0.0 | 技术教材出版规范四维审查（小白可执行性 / 技术严谨性 / 教学法有效性 / 出版规范性）+ 自动化预检脚本 |
 
 ### 三、内容创作
 

@@ -1,0 +1,31 @@
+# 默认按内容自动识别文本/二进制
+* text=auto
+
+# 脚本统一以 LF 存储与检出，避免 CRLF 破坏 shell / python 执行
+*.sh   text eol=lf
+*.py   text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# Windows 专用脚本保持 CRLF
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# 二进制文件不做换行转换
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.zip  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.min.js binary
+
+# 语言统计时排除
+*.min.js linguist-vendored

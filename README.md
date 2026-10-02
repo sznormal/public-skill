@@ -28,7 +28,9 @@ Norma 的自建 WorkBuddy Skill 集合（单体仓库 / monorepo）。
 | Skill | 版本 | 说明 |
 |---|---|---|
 | `norma-lit-review` | 0.17.0 | 理工科文献综述全流程：检索策略 → 多库检索 → 筛选分类 → 研究缺口 → 结构化综述 |
+| `bibagent` | 1.0.0 | 科学文献错误引用(miscitation)检测智能体：五类引用错误分类 + Evidence Committee 机制 + 付费墙双分支验证，产出可追踪引用完整性报告 |
 | `sci-journal-selection` | 1.2.0 | SCI 选刊决策七阶段交互流：论文画像 → 期刊偏好 → 竞争格局 → 候选池 → 硬排雷 → 匹配打分 → 冲/稳/保 |
+| `ssci-journal-selector` | 1.0.0 | SSCI 选刊 6 步证据流（论文指纹→候选池→3D 匹配打分 Topic/Method/Audience→投稿序列），支持 PDF/DOCX/TXT，产出 Excel 评分表+Markdown 报告+投稿信草稿（英文体系，与 sci-journal-selection 并存） |
 | `school-news-oa-writer` | — | 按学校 OA 规范生成可直接投稿的 Word 新闻稿（字数分级 + 排版模板 + norma 行文偏好） |
 | `textbook-review` | 1.0.0 | 技术教材出版规范四维审查（小白可执行性 / 技术严谨性 / 教学法有效性 / 出版规范性）+ 自动化预检脚本 |
 | `norma-textbook-deck` | — | 把教材 Markdown 章节稳定复现成飞书教学课件 + PPTX + 代码外置，科技深蓝风 |

@@ -1,6 +1,6 @@
 ---
 name: norma-resource-link-logger
-version: 1.2.0
+version: 1.3.0
 display_name: 资源链接记录器
 display_name_en: Resource Link Logger
 description: 把链接（GitHub 仓库、网页、教程、论文、视频等）记录到 Norma 的资源分享链接库（金山文档智能表格）。触发说法包括"记个链接""记录 + 网址""收一下 + 网址""存 + 网址""加到资源库""收藏这个网页""这些链接都记一下"，用户只给 URL 不写说明时同样触发。自动查重、按链接类型抓取元数据与简介、判断分类、追加行、回读验证，支持一次给多个链接的批量导入。
@@ -159,6 +159,8 @@ curl -s https://api.github.com/repos/{owner}/{repo}/git/blobs/{sha}
 - 若网页自述与 API `description` 数字不一致，以 API 为准并在回复中说明差异。
 
 ### 4. 写入
+
+**单格 formula 上限 1024 字节（UTF-8，约 330 个汉字）**，超限直接返回 `{"code":400001,"message":"rangeData[i].formula size N bytes exceeds limit 1024"}` 并拒绝整批写入。因此 D 列「主要作用」必须成品控：**目标 280-300 汉字以内**，精简方式是砍掉修饰语与并列举例，保留「它是什么 + 关键数字 + 对 Norma 的用途」。首次写入就按此长度写，不要写完再截断重试。其余列（B 资源名称、G 备注）保持一句话。
 
 用 `mcp__kdocs__sheet.update_range_data`，**值写进 `formula` 字段**，坐标 0-based：
 

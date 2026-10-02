@@ -66,7 +66,7 @@ Norma 的自建 WorkBuddy Skill 集合（单体仓库 / monorepo）。
 |---|---|---|
 | `archive-doctor` | 1.1.0 | 压缩包「损坏 vs 加密」诊断与批量解压，含回收站文件消失取证 |
 | `md-pdf-cover-watermark` | — | Markdown 批量转「封面 + 全页水印 + 页码」A4 PDF（纯标准库 CDP 打印 + mermaid 渲染） |
-| `norma-resource-link-logger` | 1.2.0 | 把链接（仓库/网页/教程/论文/视频）记录到资源分享链接库，自动查重、抓元数据、分类、回读验证 |
+| `norma-resource-link-logger` | 1.3.0 | 把链接（仓库/网页/教程/论文/视频）记录到资源分享链接库，自动查重、抓元数据、分类、回读验证 |
 | `norma-drawio-technical-roadmap` | 2.0.0 | 参考图版式 + 资料 → 可直接粘贴进 draw.io 的未压缩 XML 技术路线图（AFP Bronze 合规） |
 | `opc-business-positioning-v2` | — | 一人公司定位方法论：锁定商业象限、优势甜蜜区与商业原力，生成一句话定位 |
 | `html-to-docx-on-windows` | — | 在 Windows 让 tencent-docx 的 HTML→DOCX 转换跑通（绕过虚拟环境失败） |

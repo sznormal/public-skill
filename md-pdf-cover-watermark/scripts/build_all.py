@@ -7,6 +7,7 @@
     python build_all.py "E:\\教材\\学生版" --from 1 --to 10
     python build_all.py "E:\\教材\\学生版" -o "E:\\教材\\PDF" --from 11 --to 30 \
         --book "机器人编程基础" --school "深圳信息职业技术大学" --author "郑洪英"
+        --school-en "Shenzhen University of Information Technology"
 """
 import argparse
 import sys
@@ -37,6 +38,7 @@ def main():
     ap.add_argument("--to", dest="hi", type=int, default=10, help="结束章号")
     ap.add_argument("--book", default=B.CFG["book"], help="封面主标题（书名）")
     ap.add_argument("--school", default=B.CFG["school"], help="单位名称（封面/页脚）")
+    ap.add_argument("--school-en", default=B.CFG["school_en"], help="单位英文名（封面副行）")
     ap.add_argument("--author", default=B.CFG["author"], help="编著者姓名")
     ap.add_argument("--badge", default=B.CFG["badge"], help="封面徽标，如：学生版")
     ap.add_argument("--watermark", default=B.CFG["watermark"], help="水印文字（默认同单位）")
@@ -45,6 +47,7 @@ def main():
     B.CFG.update(
         book=args.book,
         school=args.school,
+        school_en=args.school_en,
         author=args.author,
         badge=args.badge,
         watermark=args.watermark,

@@ -37,6 +37,7 @@ CHROME_CANDIDATES = [
 CFG = {
     "book": "机器人编程基础",           # 封面主标题（书名）
     "school": "深圳信息职业技术大学",   # 单位名称（封面 + 页脚 + 水印默认值）
+    "school_en": "Shenzhen University of Information Technology",  # 单位英文名（封面副行）
     "author": "郑洪英",                 # 编著者
     "badge": "学生版",                  # 封面徽标
     "watermark": "",                    # 水印文字，留空则用 school
@@ -501,7 +502,7 @@ def build_html(title: str, body_html: str) -> str:
     <div class="cover-band-gold"></div>
 
     <div class="cover-school">{CFG['school']}</div>
-    <div class="cover-school-en">Shenzhen Institute of Information Technology</div>
+    <div class="cover-school-en">{CFG['school_en']}</div>
 
     <div class="cover-body">
       <div class="cover-title">{CFG['book']}</div>
@@ -699,6 +700,7 @@ def main():
     ap.add_argument("out_dir", help="输出目录")
     ap.add_argument("--book", default=CFG["book"], help="封面主标题（书名）")
     ap.add_argument("--school", default=CFG["school"], help="单位名称（封面/页脚）")
+    ap.add_argument("--school-en", default=CFG["school_en"], help="单位英文名（封面副行）")
     ap.add_argument("--author", default=CFG["author"], help="编著者姓名")
     ap.add_argument("--badge", default=CFG["badge"], help="封面徽标，如：学生版")
     ap.add_argument("--watermark", default=CFG["watermark"], help="水印文字（默认同单位）")
@@ -707,6 +709,7 @@ def main():
     CFG.update(
         book=args.book,
         school=args.school,
+        school_en=args.school_en,
         author=args.author,
         badge=args.badge,
         watermark=args.watermark,

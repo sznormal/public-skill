@@ -131,7 +131,9 @@ build/               # 中间产物：每章 HTML + 封面/正文 PDF
 - 水印：`WM_COUNT=12` 个，2 列网格，`rotate(-30deg)`，`rgba(79,70,229,.11)`
 - 页边距：上 16mm / 下左右各 18mm
 
-封面/水印文案统一走 `CFG` 字典，命令行 `--book/--school/--author/--badge/--watermark` 覆盖。
+封面/水印文案统一走 `CFG` 字典，命令行 `--book/--school/--school-en/--author/--badge/--watermark` 覆盖。
+
+**单位名称规范（2026-10-02）**：中文 `深圳信息职业技术大学`，英文 `Shenzhen University of Information Technology`；学院 `中德机器人学院` / `Sino-German Robotics School`。英文校名**不是** `Shenzhen Institute of Information Technology`（旧拼法，已作废）。`school_en` 用于封面中文校名下方的副行。
 
 ## 一句话总结
 

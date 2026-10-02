@@ -23,7 +23,9 @@ agent_created: true
 用 WorkBuddy 托管 Python 环境，装三个纯 Python 包即可（**不需要 playwright**）：
 
 ```bash
-PY="C:\Users\admin\.workbuddy\binaries\python\envs\default\Scripts\python.exe"
+# WorkBuddy 托管 venv 的 python（按本机 HOME 推导，勿写死用户名）
+PY="$HOME/.workbuddy/binaries/python/envs/default/Scripts/python.exe"   # Windows
+# PY="$HOME/.workbuddy/binaries/python/envs/default/bin/python"          # macOS / Linux
 "$PY" -m pip install markdown pypdf pymupdf
 ```
 

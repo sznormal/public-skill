@@ -84,8 +84,9 @@ def build(title, body_paras, credit):
     set_pf(pa, space_before=0, first_indent=0)
     return doc
 
-# 运行环境（managed venv，已含 python-docx）：
-# C:\Users\admin\.workbuddy\binaries\python\envs\default\Scripts\python.exe gen.py
+# 运行环境（managed venv，已含 python-docx；按本机 HOME 推导，勿写死用户名）：
+# Windows:      ~/.workbuddy/binaries/python/envs/default/Scripts/python.exe gen.py
+# macOS/Linux:  ~/.workbuddy/binaries/python/envs/default/bin/python gen.py
 ```
 - 写脚本用 `Write` 落盘到工作区 `outputs/`，再用 managed venv 的 python 执行。
 - 自检：重新 `Document(path)` 读取，校验每段字号/字体/行距（EXACTLY 规则下 `line_spacing` 为 EMU，需 ÷12700 得磅）/段前段后。

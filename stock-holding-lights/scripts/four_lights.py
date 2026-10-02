@@ -14,6 +14,7 @@
 """
 
 import sys
+import glob
 import json
 import os
 import subprocess
@@ -22,16 +23,24 @@ import subprocess
 # 配置
 # ============================================================
 
-# neodata 脚本路径候选列表
+def _wb_home(*parts):
+    """WorkBuddy 用户目录，按本机 HOME 推导，不写死用户名。"""
+    return os.path.join(os.path.expanduser("~"), ".workbuddy", *parts)
+
+
+# neodata 脚本路径候选列表（按本机 ~/.workbuddy 自动发现 + 环境变量覆盖）
 NEODATA_SCRIPT_PATHS = [
+    os.environ.get("NEODATA_SCRIPT", ""),
+    *sorted(glob.glob(_wb_home("plugins", "**", "neodata-financial-search", "scripts", "query.py"), recursive=True)),
+    *sorted(glob.glob(_wb_home("resources", "builtin-skills", "neodata-financial-search", "scripts", "query.py"))),
     "D:/workbudy/WorkBuddy/resources/app.asar.unpacked/resources/builtin-skills/neodata-financial-search/scripts/query.py",
-    "C:/Users/admin/.workbuddy/plugins/marketplaces/experts/plugins/investment-masters-team/skills/neodata-financial-search/scripts/query.py",
 ]
 
-# Python 路径候选列表
+# Python 路径候选列表（按本机 ~/.workbuddy 自动发现版本）
 PYTHON_PATHS = [
-    "C:/Users/admin/.workbuddy/binaries/python/versions/3.13.12/python.exe",
-    "C:/Users/admin/.workbuddy/binaries/python/versions/3.12.13/python.exe",
+    os.environ.get("PYTHON_BIN", ""),
+    *sorted(glob.glob(_wb_home("binaries", "python", "versions", "*", "python.exe")), reverse=True),
+    *sorted(glob.glob(_wb_home("binaries", "python", "envs", "*", "Scripts", "python.exe")), reverse=True),
     "D:/miniconda/python.exe",
 ]
 

@@ -16,18 +16,27 @@ ETF定投回测分析脚本
 
 import sys
 import os
+import glob
 import json
 import argparse
 import subprocess
 from datetime import datetime, timedelta
 
-# ---- 路径解析（自动适配不同机器上的 westock-data 安装位置）----
+
+# ---- 路径解析（自动适配不同机器上的运行时与 westock-data 安装位置）----
+def _wb_home(*parts):
+    """WorkBuddy 用户目录，按本机 HOME 推导，不写死用户名。"""
+    return os.path.join(os.path.expanduser("~"), ".workbuddy", *parts)
+
+
 def find_node():
-    candidates = [
-        os.environ.get("NODE_BIN", ""),
-        r"C:/Users/admin/.workbuddy/binaries/node/versions/22.22.2/node.exe",
+    candidates = [os.environ.get("NODE_BIN", "")]
+    candidates += sorted(glob.glob(_wb_home("binaries", "node", "versions", "*", "node.exe")), reverse=True)
+    candidates += [
         r"D:/Program Files/nodejs/node.exe",
         r"C:/Program Files/nodejs/node.exe",
+        "/usr/local/bin/node",
+        "/usr/bin/node",
     ]
     for c in candidates:
         if c and os.path.exists(c):
@@ -38,15 +47,21 @@ def find_node():
 def find_westock_cli():
     if os.environ.get("WESTOCK_CLI"):
         return os.environ["WESTOCK_CLI"]
-    candidates = [
+    candidates = []
+    for pattern in (
+        ("plugins", "**", "westock-tool", "scripts", "index.js"),
+        ("plugins", "**", "westock-data", "scripts", "index.js"),
+        ("resources", "builtin-skills", "westock-data", "scripts", "index.js"),
+    ):
+        candidates += sorted(glob.glob(_wb_home(*pattern), recursive=True))
+    candidates += [
         r"D:/workbudy/WorkBuddy/resources/app.asar.unpacked/resources/builtin-skills/westock-data/scripts/index.js",
-        r"D:/workbuddy/resources/app.asar.unpacked/resources/builtin-skills/westock-data/scripts/index.js",
-        r"C:/Users/admin/.workbuddy/resources/builtin-skills/westock-data/scripts/index.js",
+        r"D:/workbudy/resources/app.asar.unpacked/resources/builtin-skills/westock-data/scripts/index.js",
     ]
     for c in candidates:
         if os.path.exists(c):
             return c
-    return candidates[0]
+    return candidates[0] if candidates else ""
 
 
 WESTOCK_CLI = find_westock_cli()

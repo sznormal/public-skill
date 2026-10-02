@@ -32,9 +32,10 @@ agent_created: true
 
 - westock-data 为内置技能，无需额外安装。
 - 运行备选/回测脚本需 Node（执行 westock-data CLI）与 Python 3（运行 `etf_dca_backtest.py`）。
-- 优先使用托管运行时：
-  - Node: `C:\Users\admin\.workbuddy\binaries\node\versions\22.22.2\node.exe`
-  - Python: `C:\Users\admin\.workbuddy\binaries\python\versions\3.13.12\python.exe`
+- 优先使用托管运行时（脚本自动从 `~/.workbuddy/binaries/` 按版本推导，无需写死路径）：
+  - Node: `~/.workbuddy/binaries/node/versions/<版本>/node.exe`
+  - Python: `~/.workbuddy/binaries/python/versions/<版本>/python.exe`
+  - 也可用环境变量覆盖：`NODE_BIN`、`WESTOCK_CLI`
 
 ## westock-data 命令速查
 
@@ -83,8 +84,7 @@ node $WESTOCK etf detail <代码>
 执行回测脚本：
 
 ```bash
-C:\Users\admin\.workbuddy\binaries\python\versions\3.13.12\python.exe \
-  scripts/etf_dca_backtest.py <ETF代码> \
+python scripts/etf_dca_backtest.py <ETF代码> \
   --freq weekly|monthly --amount 1000 --period 2y --fq qfq
 ```
 

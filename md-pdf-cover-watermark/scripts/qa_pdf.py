@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """PDF 质检：把指定页渲染为 PNG，便于人工/模型目视核对。"""
+import os
 import sys
+import tempfile
 from pathlib import Path
 
 import fitz  # pymupdf
 
-QA_DIR = Path(r"C:\Users\admin\.workbuddy\tmp\pdfqa")
+QA_DIR = Path(os.environ.get("PDFQA_DIR") or (Path(tempfile.gettempdir()) / "pdfqa"))
 
 
 def render(pdf_path: str, pages, dpi=110, tag="qa"):

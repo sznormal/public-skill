@@ -25,11 +25,11 @@
 
 | 类型 | 例子 | 应改为 |
 |------|------|--------|
-| Windows 用户路径 | `C:\Users\admin\.workbuddy\...` | 泛指 `~/.workbuddy/skills/`（用户级）或 `.workbuddy/skills/`（项目级） |
+| Windows 用户路径 | `C:\Users\<用户名>\.workbuddy\...` | 泛指 `~/.workbuddy/skills/`（用户级）或 `.workbuddy/skills/`（项目级） |
 | macOS/Linux home | `/home/norma/...` `/Users/norma/...` | `~/.workbuddy/...` |
 | 云盘同步目录 | `E:\BaiduSyncdisk\...` / `百度网盘` | 删除具体路径，提示「勿放入会被云盘同步的目录」 |
 | 密钥文件 | `s2_key.txt` 绝对路径 | 改为「用环境变量临时传入」 |
-| managed Python 绝对路径 | `C:\Users\admin\.workbuddy\binaries\python\...` | 改为「任意 Python 3.8+ / WorkBuddy 自带 managed Python」 |
+| managed Python 绝对路径 | `C:\Users\<用户名>\.workbuddy\binaries\python\...` | 改为「任意 Python 3.8+ / WorkBuddy 自带 managed Python」 |
 
 ## 三、「用户自行提供密钥」标准话术（写入 README / 文档）
 

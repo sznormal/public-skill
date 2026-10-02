@@ -95,7 +95,7 @@ for fn in os.listdir(tpl_dir):                      # tpl_dir = <skill>/template
         body = ''.join(z.read(n).decode('utf-8', 'ignore')
                        for n in z.namelist() if n.startswith('word/') and n.endswith('.xml'))
         text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', body))
-        for pat in (r'C:\\Users\\admin', r'(?i)baidusyncdisk', r'\.workbuddy'):
+        for pat in (r'C:\\Users\\<用户名>', r'(?i)baidusyncdisk', r'\.workbuddy'):
             if re.search(pat, text):
                 print('  [!] 正文命中', pat)
 ```
@@ -113,7 +113,7 @@ for fn in os.listdir(tpl_dir):                      # tpl_dir = <skill>/template
 - **真实密钥**：必须删除。改为「用户自行提供」的说明（见 `references/audit-patterns.md`
   第三节标准话术），写入对应文件与 README。
 - **个人路径**：泛化为通用表述——
-  - `C:\Users\admin\.workbuddy\...` → `~/.workbuddy/skills/`（用户级）或 `.workbuddy/skills/`（项目级）
+  - `C:\Users\<用户名>\.workbuddy\...` → `~/.workbuddy/skills/`（用户级）或 `.workbuddy/skills/`（项目级）
   - `E:\BaiduSyncdisk\...` / `百度网盘` → 删除具体路径，提示「勿放入会被云盘同步的目录」
   - `s2_key.txt` 绝对路径 → 「用环境变量临时传入」
   - managed Python 绝对路径 → 「任意 Python 3.8+ / WorkBuddy 自带 managed Python」

@@ -5,6 +5,9 @@ _bm_skillid_migration.json
 # ===== 打包产物（可重新生成）=====
 *.zip
 
+# 例外：legacy/ 归档中的历史版本包需要入库留档
+!**/legacy/*.zip
+
 # ===== 第三方 skill（不属于本仓库自建范围）=====
 /academic-research-skills/
 /openmaic__skillhub/

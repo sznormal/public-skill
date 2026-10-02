@@ -8,6 +8,7 @@
 |---|---|---|---|---|
 | `suit-sz-teaching-suite-norma-v1.0.0.zip` | 1.0.0 | 2026-09-03 | `workspace/2026-09-03-22-39-47/` | 78.6 KB |
 | `suit-sz-teaching-suite-norma-v1.1.0.zip` | 1.1.0 | 2026-09-03 | `workspace/2026-09-03-22-39-47/` | 89.1 KB |
+| `suit-sz-teaching-suite-norma-v1.2.0.zip` | 1.2.0（当前版本快照） | 2026-09-16 | `workspace/2026-09-16-18-52-31/` | 96.6 KB |
 | `suit-sz-teaching-team.zip` | 团队 1.1.2 | 2026-09-16 | `workspace/2026-09-16-18-52-31/` | 2,533.3 KB |
 
 ## docs/

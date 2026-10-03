@@ -145,7 +145,7 @@ norma-lit-review/
 │   ├── 07-quality-review.md              # P7 质量审核（含字数闸门）
 │   ├── 08-publication-review.md          # P8 审稿人角色发表级审查
 │   └── 09-revision.md                    # P9 审稿后修订闭环
-├── modules/                              # 8 个按需模块，触发才加载
+├── modules/                              # 10 个按需模块，触发才加载
 │   ├── stem-databases.md                 # 理工科数据库配置
 │   ├── citation-standards.md             # 引用规范（GB7714 / IEEE）
 │   ├── review-types.md                   # 综述类型定义与字数门禁
@@ -153,7 +153,9 @@ norma-lit-review/
 │   ├── stem-review-anti-patterns.md      # 常见反模式清单（34 条）
 │   ├── verified-retrieval-protocol.md    # 真实检索 / 核验协议
 │   ├── search-methodology.md             # 检索方法论（检索日志/召回率/滚雪球/遗漏评估）
-│   └── evidence-mapping.md               # 论断-证据映射（E0-E4 强度分级/孤证披露/大纲推导）
+│   ├── evidence-mapping.md               # 论断-证据映射（E0-E4 强度分级/孤证披露/大纲推导）
+│   ├── figure-export.md                  # 图稿矢量导出（SVG→PDF/EPS，中文字体注册）
+│   └── quantitative-synthesis.md         # 定量综合可行性探针与可比性边界（元分析组件）
 └── scripts/
     ├── fetch_arxiv.py                    # P2/P6 用：arXiv 检索与核验（仅 stdlib，无需 API key，3 秒/请求限速）
     ├── fetch_lit.py                      # P2/P6/T4 用：OpenAlex 检索 + Crossref DOI 核验 + OpenCitations 引文（免 key）
@@ -174,13 +176,23 @@ norma-lit-review/
 
 ## 七、版权与作者
 
-- **作者 / 维护者**：Norma（职教本科理工科教师 · 工信部入库专家）
-- **许可证**：**GPL-3.0（GNU General Public License v3.0，或任何更新版本）**，详见仓库内 `LICENSE` 文件。
-  - 这是**强 Copyleft（著佐权）**协议：你可以自由使用、修改、再分发本 skill，也可用于商业用途；
-    但**任何基于本 skill 的衍生作品（包括修改、合并、再分发）都必须以 GPL-3.0 开源**，不得闭源或附加额外限制，
-    且修改过的文件须显著标注改动。这保证了它（及其所有衍生）永远保持自由、可被任何人查看与改进。
-  - 协议同时包含**专利授权**（贡献者将其必要专利免费授权给使用者）与**免责条款**。
-  - © 2026 Norma。基于 GPL-3.0 授权，转载与二次开发请保留本版权声明，并以同等协议开源。
+- **作者 / 维护者**：Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+- **许可证**：**PolyForm Noncommercial License v1.0.0**（自 **v0.10.0** 起适用），完整条款见仓库根目录 `LICENSE`。
+  - **允许**：阅读、复制、修改、创作衍生作品、再分发。
+  - **允许**：个人学习研究、非营利教学使用——协议**明文豁免教育机构**（educational institution），
+    且**与 funding 来源无关**，高校教师用本 skill 备课教学属许可用途。
+  - **禁止**：任何商业用途（销售、付费服务、企业内部经营性使用、SaaS 化）。
+  - **含专利条款**：授予专利许可；若使用者对本 skill 提起专利侵权诉讼，专利许可**立即终止**。
+  - **含终止条款**：使用者违约时给予 32 天补救期，仍不改正则许可终止。
+  - **作者保留权利**：不限制作者另行签发商业许可（双重许可）。
+  - © 2026 Norma（郑洪英）。基于 PolyForm Noncommercial v1.0.0 授权，转载与二次开发须保留本版权声明。
+- **版本许可说明**：
+  - **v0.10.0（2026-09-07）及之后**的全部版本适用 PolyForm Noncommercial v1.0.0。
+  - **v0.9.x 及更早版本**为历史状态，不受上述声明追溯约束。
+  - 本许可仅约束作者后续发布的新版本；他人已获得的旧版本许可不可撤销，作者无权收回。
+- **历史变更**：本 skill 原为 GPL-3.0，因其明确允许商用（仅要求分发时附源码），与「可公开但禁止商用」的发布目标冲突，
+  自 v0.10.0 起改用 PolyForm Noncommercial v1.0.0。GPL-3.0 全文留档于 `legacy/LICENSE-GPL-3.0-superseded.txt`，
+  仅作历史溯源之用。
 - **免责声明**：本 skill 输出仅供学术写作参考，所有引用的参考文献须由使用者逐条核验；
   因使用本工具产生的学术不端、误引或投稿风险，作者不承担任何责任。
 

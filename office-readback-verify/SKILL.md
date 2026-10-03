@@ -12,7 +12,7 @@ description: >
   (5) 关键词：回读校验 / 逐格比对 / 单元格比对 / 写入验证 / 读docx / 读xlsx / 读pptx / 读PDF /
       无依赖读Office / 读PDF文字层 / PDF文本提取 / 校验PDF渲染 / pdftotext 替代 /
       readback / cell-level diff / verify xlsx / verify pdf text layer / no-dependency office reader。
-version: 1.1.0
+version: 1.2.0
 agent_created: true
 ---
 
@@ -122,6 +122,20 @@ SK=~/.workbuddy/skills/office-readback-verify/scripts
 
 - **写入类委派一律以逐格比对收尾**，不得只凭子代理回执或行数统计验收。
 - **排版/编译类产物一律以"页面文本层回读"收尾**，不得只凭编译日志无报错就宣称渲染正确。
+- **Markdown→LaTeX 转换器最危险的失败模式是"降级但能编译"。** 编译零报错、页数正常、参考文献齐全，
+  但**语义结构悄悄丢了**。已实测的三例，全部靠回读原文才能发现：
+  ① **摘要被降级为正文**——转换器跳过 `## Abstract` 标题行，摘要变成标题下一段无题正文
+     （`\begin{abstract}` 环境根本没生成）；判据：`grep -c 'begin{abstract}'` 必须为 1。
+  ② **表格题注回退到最近的章节标题**——表格没有自己的标题行时，题注取 `last_heading`，
+     导致数个表格共用同一个题注（实测三张表都叫 `Temporal trend and representative systems`）；
+     判据：`grep -o 'caption{[^}]*}'` 逐条肉眼过一遍，**不允许重复、不允许与表格内容无关**。
+     正解是"有自带标题用自带的、没有就明确标 `Section N: Title`"，不要硬凑一个假标题。
+  ③ **正文尾部残留分隔符**——切片到 `## References` 之前没去掉 `---`，`---` 变成 `\begin{abstract}`
+     里的一段满宽横线。
+- **给每个转换产物配一条"结构断言"**（`raise SystemExit(...)`），别让降级静默通过；
+  在生成器里断言"摘要环境存在""章节数 ≥ N""题注无重复"，比事后人眼查靠谱。
+- **换输入格式必须单独重跑一遍全流程**：TXT 正常会掩盖 PDF/DOCX 分支的缺陷，同一转换器不同输入
+  走的是不同代码路径。
 - 修复偏差时**只改受影响单元格**，并要求"其余单元格保持原值、不得插行删行"；改完必须再比对一次。
 - 若模板有必须保留的横幅/表头行（如合并单元格说明行），在委派指令里**明确点名"原样保留、不得改动"**。
 - **不要覆盖用户的原始模板**：先 `cp` 成独立副本再写入，交付副本，原件保持不动。
@@ -130,6 +144,14 @@ SK=~/.workbuddy/skills/office-readback-verify/scripts
 ## 已知环境坑
 
 - **`pdftotext` / poppler 通常不存在**，TinyTeX 里也没有。不要为了读 PDF 文本去装 poppler，直接用 `read_pdf.py`。
+- **LaTeX 工具链可能有两条，且默认的哪条都不完整。** 实测：系统 `C:\texlive\2026` 只有 74 个可执行文件、
+  **没有 `biblatex.sty`**，`pdflatex` 直接 `Emergency stop`；而 `biber.exe` 只在 TinyTeX 里。
+  可用的组合是 **TinyTeX**（`$HOME/.workbuddy/binaries/tex/TinyTeX/TinyTeX/bin/windows`，`pdflatex` + `biber` 齐全）。
+  先 `kpsewhich biblatex.sty` 探一下包在不在，比编译一遍看报错快。
+- **PDF 文本层提取有假象，判 MISSING 前必须 `--find` 看上下文。** 三类常见假象：
+  ① 字距拆词（`Sino-GermanRoboticsSchool`）、② ff/fi 连字吞字（`scientic`、`veri"ability`）、
+  ③ `set off` 被读成 `set o`。另外**图件题注若是 Type3 字体，提取器整段读不出**（不是缺字，是编码方式不同），
+  **首页 `\maketitle` 默认无页眉属正常**，页尾几页的 URW/GNU 字体许可声明也不是正文。
 - **模板默认值 ≠ 未填的占位符**。看到页脚出现 `Vol. 4, Article 6`、`Insert <AE Name>`、`10.1613/jair.1.xxxxx`
   这类"像占位符"的字符串，**先回查官方模板原文**再判定。实测 JAIR 模板第 25–30 行就是这几个值，
   由编辑部排版时赋值，作者不需要改——**判据是模板逐行同源，不是"看起来像"**。
@@ -159,3 +181,9 @@ SK=~/.workbuddy/skills/office-readback-verify/scripts
 单位串与页眉短名，全部 OK，并确认生成物里占位符与旧机构名计数为 0。
 期间正是用 `--find` 读到页脚上下文，才发现 `Vol. 4, Article 6` 一类"像占位符"的值其实是模板默认值——
 **回查模板原文才避免误报**。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

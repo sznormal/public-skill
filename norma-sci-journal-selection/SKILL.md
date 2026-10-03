@@ -1,7 +1,7 @@
 ---
-name: sci-journal-selection
+name: norma-sci-journal-selection
 description: "理工科论文写好后的 SCI 选刊决策助手——AFP 式七阶段交互流：论文画像扫描→期刊偏好采集（分区/IF区间/类型/OA/APC/速度/接收率，可量化加权）→竞争格局扫描与选题配对→候选池→硬排雷→匹配打分（证据等级E0–E3门槛+双维打分+Desk Reject Risk）→冲/稳/保三档梯度。每阶段产出落盘+用户确认点，内置 2026 分区换表情报、On Hold/预警排雷与成品 Prompt 模板库。触发词覆盖：SCI选刊、选刊、怎么选期刊、投稿选刊、期刊选择、论文投哪本、帮我选个期刊、投哪个期刊、journal selection。【触发隔离】：仅在用户已写好论文、需要确定投稿期刊时触发；写文献综述走 norma-lit-review；纯查单个期刊影响因子、写论文正文、润色英文时不触发。"
-version: 1.3.0
+version: 1.5.0
 agent_created: true
 ---
 
@@ -116,7 +116,9 @@ agent_created: true
 
 ### 阶段 4 · 硬性排雷（最关键）
 
-逐刊核查，依据 `references/red-flags.md` **五关**：收录状态（On Hold）→ 预警与 under review → 高风险特征 → 征稿范围与文章类型（综述稿额外两道关：邀稿限制 + 体量门槛）→ **编辑胃口与选题适配**。可调用 `references/prompt-templates.md` 的 **Prompt 4.1** 逐关输出核查记录。
+逐刊核查，依据 `references/red-flags.md` **五关**：收录状态（On Hold）→ 预警与 under review → 高风险特征 → **征稿范围与文章类型**（综述稿走 4a 文章类型 / 4b 体量门槛 / 4c 邀稿限制 / **4d「研究类文章占比」初筛** / **4e 官网 scope 隐藏否决条款**）→ **编辑胃口与选题适配**。可调用 `references/prompt-templates.md` 的 **Prompt 4.1** 逐关输出核查记录。
+
+> **v1.4.0 提示**：4d「研究类文章占比」（LetPub 期刊页）能一次筛掉大量"官网没写不收、实际不发综述"的刊，但**不得单独据此否决**，须与 4a「该刊近两年实际发表物」交叉验证。4e 要求逐字读 Aims & Scope 原文——一句话即可排除一整类稿件。
 
 **命中任一否决项 → 进"排除表"并写明原因**，不用"可能没事"含糊过去。
 
@@ -136,6 +138,8 @@ agent_created: true
 | **E3** | 另读过该刊高被引文章 / 编辑社论 / 作者指南全文 | ✅ 可进终选，标"证据充分" |
 
 > 下文"下载近两年 3–5 篇"**仅达 E2 下限**；未达 10–20 篇精读者，停在 E1/E2，**不出总分**，只列入"待观察"。
+
+> 🆕 **E2 怎么做、读到什么才算够**（v1.5.0 新增，详见 `references/journal-tools.md` 同名小节）：用 **Crossref `/journals/{ISSN}/works` + 标题词本地正则复核**做可穷举采集，再按相关度取 15–20 篇逐篇取摘要（Elsevier 走 ScienceDirect 文章页 + Crossref `alternative-id` 里的 PII；Springer 被 Cloudflare 拦时走 DOI 基金会 / ACM Literatum / Mendeley / OUCI / 精确题名检索快照）。**E2 专供两个维度的依据：图件常规量 → 篇幅与体量；附原创基准/元分析的比例 → 实验深度。** 这两项官网不写，不读 E2 只能靠印象给分。
 
 **② 双维打分**（对通过排雷、且达 E2 的刊）
 
@@ -284,3 +288,16 @@ agent_created: true
 3. 全部候选刊均命中 🔴 → 回到阶段 0 重新画像定赛道，不硬凑梯度。
 4. 无联网且用户不愿手动核查 → 交付"待核清单 + 核查路径"，标注未完成项。
 5. **阶段 2 竞争扫描判定选题已饱和且用户不接受任何 reframing 角度 → 停止选刊**，只交付选题配对矩阵与风险说明，不硬排梯度。
+
+## 更新记录
+
+- **v1.5.0（2026-10-02）**：E2 精读实战（机器视觉综述 · 前两名候选刊）后修订，**核心新增：E2 不但能出分，还能让排序反转**。① `references/journal-tools.md` 新增 **「E2 精读的可复现取证法」**（Crossref `/journals/{ISSN}/works` + `query.title` + **本地正则二次复核**；摘要取得通道优先级——ScienceDirect 文章页（PII 取自 Crossref `alternative-id`）→ DOI 基金会 / ACM Literatum / Mendeley / OUCI / Scilit → 精确题名引号检索快照；**Crossref/OpenAlex 对 Elsevier·Springer 多数记录不存摘要，`abs=0` 不等于该文无摘要**）与 **「★ E2 必看的四个综述友好度指标」**（综述是否常规体裁 / **图件常规量** / **附原创基准或元分析的比例** / 参考文献区间与中位）。② `references/red-flags.md` 第 4 关新增 **4f「综述体裁的两项隐性常规」**——**图件量** 与 **实证组件** 官网不写、只能 E2 实测，偏差不否决但在「实验深度」「篇幅与体量」上扣分，并给出**低成本补法**（从已引文献抽已发表指标做元分析，顺带补齐 refs 与图件）：本轮 TVC 综述常规 10—14 图、≈42% 附基准或元分析 → 该稿「2 图 0 实验」致 **92.8→83.8、冲降稳**；NC 以纯梳理为主 → 不扣分、**升至冲档首选**。③ 第 5 关新增 **5.2.1「章节级重叠 ≠ 同题」判定规则**（四级重叠分层：整篇同题 🔴 / 同域异视角 🟡 / **章节级重叠弱指示** / 单点重叠；**计数须逐条报「撞你哪一章」，只报篇数无效**；「该刊反复发表你的形态但选题不同」是**正向证据**应写入创新点匹配）——本轮 NC 有 **9 篇章节级重叠但 0 篇同题**，误判为同题会**无谓排除首选刊**。④ `references/journal-tools.md` 新增 **「Elsevier / Springer 期刊首页一手字段清单」**（`sciencedirect.com/journal/<刊>` 直接给 APC + 「Subscription: No publication fee」+ **Journal Insights 四段速度**；`guide-for-authors` 给 **Article types 全文**；`link.springer.com/journal/<id>` 给 Hybrid/OA + `Submission to first decision (median)` + 收录库含 CNKI/Wanfang），并 **把速度分级表里的 NC 示例由「百科转引官网」升级为 Elsevier 期刊页一手**，同时补两条易误读提醒（Springer 的 `first decision (median)` 是**编辑初筛**不是审稿周期；Elsevier 的 `first decision` 与 `decision after review` 必须成对读）。⑤ 记录 `rd.springer.com`、`link-proxy.springer.com` **同样被 Cloudflare 拦**，换 Springer 子域无效。⑥ `references/matching-score-template.md` 新增 **「E2 精读 → 打分维度映射表」**与纪律「只报新分数不报修正依据 = 不可审计」。
+- **v1.4.0（2026-10-02）**：机器视觉综述选刊实战后修订，新增三类可复用核验方法。① `references/red-flags.md` 第 4 关新增 **4d「研究类文章占比」**（LetPub 期刊页指标，文章÷(文章+综述)，≈100% 即实际不发综述——本轮一次筛掉 MVA/JRTIP/PAA/C&IS/CVIU 五本）与 **4e「官网 scope 隐藏否决条款」**（逐字读 Aims，如 MVA 原文 "Papers must include a significant experimental validation component" 一句排除全部综述稿）。② `references/journal-tools.md` 新增 **「速度证据的可靠性分级」**（A 级官网流程分段数据 > B 级可追溯单篇 Received/Accepted/Published 时间线 > C 级出版社聚合指标 > D 级第三方"平均审稿速度"；**D 级不得单独用于判剔除**）与 **「一手通道被拦截时的取数办法」**（Springer link.springer.com 与 Wiley onlinelibrary 在自动化访问下返回 `Client Challenge`，改用 springer.com 主站 / 第三方逐字转引页 / 百科类转引官网流程数据）。③ 阶段 4 描述同步更新。
+- **v1.3.0（2026-09-30）**：量化数据分级纪律（用户偏好 / IF·分区参考值 / 其他代查数值 / 接收率四类分别立规）；新增证据等级 E0—E3 门槛、Desk Reject Risk、新锐分区换表情报。
+- **v1.2.0（2026-09-26）**：新增第 5 关「编辑胃口与选题适配」与撞题三级风险；`references/field-candidates.md` 增 AI/机器学习/智能体方向候选刊与两条专属雷区。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

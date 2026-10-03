@@ -15,8 +15,12 @@ from collections import Counter
 class JournalCandidateBuilder:
     """Build candidate journal pool from paper references"""
 
-    def __init__(self):
-        self.min_frequency = 2  # Minimum times a journal must appear
+    def __init__(self, min_frequency: int = 1):
+        # A journal cited only once is still a legitimate signal (a new or niche
+        # venue is routinely cited once in a 100+ reference survey), so the default
+        # keeps every hit and lets ranking do the filtering. Raise it to 2+ when
+        # the reference list is large and noisy.
+        self.min_frequency = min_frequency
 
     def extract_journals_from_references(self, references: List[str]) -> List[Tuple[str, int]]:
         """
@@ -46,32 +50,76 @@ class JournalCandidateBuilder:
         """
         Parse journal name from a single reference.
 
-        This is a simplified parser - may need refinement for specific formats.
+        Strategy: prefer the explicit GB/T 7714 type marker, which states what the
+        source actually is. Only [J] denotes a journal; [C] is a conference
+        proceedings, [M] a book, [EB/OL] an online resource/preprint. Guessing the
+        venue by position alone is unreliable (it silently mislabels proceedings
+        and reports as journals), so marker-based matching runs first and the
+        positional heuristics only serve unmarked references.
         """
-        # Common patterns for journal references
-        patterns = [
-            # Pattern 1: Journal Name. Year;Volume:Pages
-            r'^([A-Z][A-Za-z\s&]+?)\.\s*\d{4}',
-            # Pattern 2: Authors. Journal Name, Year
-            r'\.\s*([A-Z][A-Za-z\s&]+?),\s*\d{4}',
-            # Pattern 3: Journal Name (Year)
-            r'^([A-Z][A-Za-z\s&]+?)\s*\(\d{4}\)',
-        ]
+        # 1) GB/T 7714 style: title[J]. Journal Name, vol...
+        m = re.search(r'\[(?:J|Journal)\]\s*\.?\s*([^,.;]{3,90})', reference)
+        if m:
+            j = self._clean_journal(m.group(1))
+            if j:
+                return j
 
-        for pattern in patterns:
+        # 2) Unmarked English author-year style (AAAI/IEEE/JAIR house styles):
+        #    Author. Year. "Article Title." Journal Name, 59, 1. doi:...
+        #    The venue sits after the closing quote, so none of the year-anchored
+        #    patterns below can reach it. Conference papers use the same slot
+        #    ("In:Proc. ACL") and are rejected later by _NON_JOURNAL.
+        m = re.search(r'[”"]\s*,?\s*'
+                      r'([A-Z][A-Za-z\s&,.\-]{5,70}?)'
+                      r',\s*(?:\d+|vol|issue|pp)',
+                      reference)
+        if m:
+            j = self._clean_journal(m.group(1))
+            if j:
+                return j
+
+        # 3) Unmarked: "Journal Name, 2024" / "Journal Name. Year;Vol:Pages"
+        for pattern in (
+            r'\.\s*([A-Z][A-Za-z\s&,.\-]+?),\s*(?:vol\.?\s*)?\d{4}',
+            r'([A-Z][A-Za-z\s&,.\-]+?)\s*,\s*(?:vol\.?\s*)?(?:19|20)\d{2}\s*[;:]',
+            r'\.\s*([A-Z][A-Za-z\s&,.\-]+?)\.\s*(?:19|20)\d{2}\s*;',
+        ):
             match = re.search(pattern, reference)
             if match:
-                journal = match.group(1).strip()
-                # Clean up common issues
-                journal = journal.replace('&', 'and')
-                journal = ' '.join(journal.split())  # Normalize whitespace
-
-                # Filter out obvious non-journals
-                if len(journal) > 5 and not any(x in journal.lower() for x in
-                    ['university', 'press', 'chapter', 'book', 'ed.', 'editor']):
-                    return journal
+                j = self._clean_journal(match.group(1))
+                if j:
+                    return j
 
         return ''
+
+    # Sources that are venues-adjacent but not journals selectable as an SSCI/SCIE
+    # target; used only to reject obvious false positives.
+    _NON_JOURNAL = ('press', 'university', 'chapter', 'book', 'workshop', 'symposium',
+                    'conference', 'proceedings', 'technical report', 'foundation',
+                    'institute', 'laboratory', 'retrieved from', 'arxiv', 'preprint',
+                    'editors', 'edition')
+
+    def _clean_journal(self, raw: str) -> str:
+        """Normalise whitespace/markup and reject obvious non-journals."""
+        j = raw.strip().strip('*.,;: ')
+        j = re.sub(r'\s+', ' ', j)
+        j = j.replace('&', 'and')
+        # "ACM Trans. Software Eng. ..." — a period after an abbreviation token
+        # is not a field terminator, so the split below would truncate the name.
+        j = re.sub(r'\b([A-Z][a-z]{1,9}|Trans|Proc|J|Int|Comput|Sci|Eng)\.\s+(?=[A-Z])',
+                   r'\1 ', j)
+        low = j.lower()
+        # A journal name should not itself be a length/date string
+        if len(j) < 6 or len(j) > 90:
+            return ''
+        if any(x in low for x in self._NON_JOURNAL):
+            return ''
+        if re.match(r'^(vol|no|issue|pp?|doi|isbn)\b', low):
+            return ''
+        # Reject a lone author-list fragment (many commas and initials, no words)
+        if j.count(',') >= 3 and len(j.split()) > 8:
+            return ''
+        return j
 
     def build_candidate_pool(self, paper_data: Dict) -> Dict:
         """

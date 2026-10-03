@@ -188,7 +188,7 @@ def run_pipeline(document_path: str, output_dir: str = None, mode: str = "full")
         print(f"  - 📚 {resources_dir / 'decision-framework.md'} - Decision logic")
         print(f"  - 📊 {resources_dir / 'matching-score-template.md'} - Scoring rubrics")
         print(f"  - 🤖 {resources_dir / 'prompt-templates.md'} - LLM prompts")
-        print(f"  - 📖 {script_dir.parent.parent / 'SKILL.md'} - Complete guide")
+        print(f"  - 📖 {script_dir.parent / 'SKILL.md'} - Complete guide")
 
         print("\n" + "="*70)
         return True

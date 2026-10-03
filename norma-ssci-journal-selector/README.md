@@ -1,6 +1,22 @@
-# SSCI Journal Selector - MVP Version
+# norma-ssci-journal-selector · SSCI Journal Selector (MVP Version)
 
 Minimum Viable Product for automated SSCI journal selection.
+
+> **v1.3.0 — PDF/DOCX 通道实测修复**（装齐依赖后用真实 29 页 PDF 跑通全链路发现）:
+> ① **`extract()` 对 PDF/DOCX 直接 return，绕过了章节识别** —— 全文虽抽出 10 万字符，但 title/abstract/methodology/references 全为空。现三种格式统一走识别（PDF 0 → 118 条参考文献）；
+> ② 新增 PDF 参考文献切分：PDF 抽文本没有空行，一条文献被拆成多行，且 AAAI 等用「作者. 年份.」而非 `[1]` 编号制。以「句点+年份+句点」为条目起始标志，其余行回并 —— **118 行 → 118 条，与正文实际引用数一致**（判据经真实数据标定：限定搜索前 80/100 字符会漏计，长作者列表会把年份挤出窗口）；
+> ③ 过滤 PDF 每页重复的刊眉/收稿行（"Journal of ..., Vol. 4, Article 6. Publication date: ..."、"Received 2 October 2026"）并按原文去重保序；
+> ④ 刊名解析补英文作者-年制模式（`... "Title." Journal Name, 59, 1.`）—— 此前只认 GB/T 7714 `[J]` 标记，PDF 路径候选池为 0，现为 9 本；会议论文同槽位（`In:Proc. ACL`）由 `_NON_JOURNAL` 拦下。
+> 回归：TXT 路径 118/118 与候选池不受影响；`py_compile` 全通过。
+> ⚠️ 遗留：`title` 字段从未被任何格式填充（预置空串），属既有功能缺口；AAAI 稿件本身无 `Abstract` 标题行，abstract 为空是正确的。
+
+> **v1.2.0 — 脚本层修复**（经真实稿件回归验证，116 篇参考文献样本）:
+> ① `chardet` 由硬依赖改为软依赖，缺失时不再导致脚本无法启动；
+> ② 参考文献提取从"遇到空行即截断"改为按标题定位 + 逐条累积，116 条 → **116/116 精确提取**（原仅 1 条）；
+> ③ 刊名解析改为以 GB/T 7714 类型标记为准（**只有 `[J]` 是期刊**，`[C]` 会议 / `[M]` 图书 / `[EB/OL]` 预印本一律排除），候选池从 0 → 20 本真实期刊；
+> ④ 摘要与方法章节改为锚定标题行提取，不再误抓修订说明里的同名字样；
+> ⑤ 修正一处死代码（`if 'methodology' not in result` 因键始终存在而永不执行回退分支）；
+> ⑥ 清理 SKILL.md 中 7 个不存在的文件引用，"85% 准确率"等未验证数字已删除。
 
 > **v1.1.0 — 用户确认前置**：本流程在**生成论文指纹后立即暂停**（Gate G1），让用户先核对/修正指纹；候选池生成后再暂停一次（Gate G2）让用户增删。**确认后才继续**，避免错误指纹污染后续全部步骤。可用 `--mode fingerprint` 只跑到指纹，核对修正后再 `--mode candidates` 继续。
 
@@ -218,10 +234,28 @@ Includes:
 
 ## Dependencies
 
-Install required packages:
+All three are **optional** — the skill degrades gracefully without them:
+
+| Package | Needed for | If missing |
+|---|---|---|
+| `PyPDF2` | PDF extraction | falls back to `pdfplumber`, then to text-layer heuristics |
+| `pdfplumber` | PDF table/layout extraction | falls back to `PyPDF2` |
+| `python-docx` | DOCX extraction | DOCX input is rejected |
+| `chardet` | encoding guess for TXT | falls back to the built-in `utf-8 → gbk → gb2312 → latin1` chain |
+
+Only TXT input works with zero packages installed. Install what you need:
 ```bash
 pip install PyPDF2 pdfplumber python-docx chardet
 ```
+
+On this machine they are installed in the isolated venv (do **not** install
+into the system Python):
+```bash
+C:/Users/admin/.workbuddy/binaries/python/envs/default/Scripts/python.exe scripts/document_extractor.py paper.pdf
+```
+
+Verified working on `manuscript.pdf` (29 pages, 118 refs): text layer 107,845
+chars, 118/118 references, DOCX title extraction OK.
 
 ## What's NOT in MVP (Coming Later)
 
@@ -261,3 +295,9 @@ This skill is provided for academic research purposes.
 ---
 
 **Remember**: This is an MVP to get you started quickly. For comprehensive journal selection, combine automated tools with manual analysis and LLM assistance using the provided prompt templates.
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

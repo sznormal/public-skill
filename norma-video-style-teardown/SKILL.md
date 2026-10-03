@@ -85,3 +85,9 @@ $VPY -m pip install opencv-python-headless numpy av faster-whisper
   GPT-6_Astra_风格拆解报告.md          # 报告
   GPT-6_Astra_风格拆解_复刻演示.html    # 活样本
 ```
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

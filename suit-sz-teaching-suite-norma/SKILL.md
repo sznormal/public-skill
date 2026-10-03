@@ -124,3 +124,9 @@ description_en: A teaching-document authoring skill for college and vocational-s
 - 不处理单页讲义、PPT、论文、报告、公函等非教学公文类文档。
 - 督导环节只读检查并出报告，不自动修改任何 docx。
 - 生成内容须经任课教师与教研室审核确认后使用。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

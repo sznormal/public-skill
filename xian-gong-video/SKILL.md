@@ -131,3 +131,9 @@ description_en: AI video prompt rules and templates for Chinese celestial-palace
 ## 参考
 
 完整可抄范例（九遇 7 组、冷檬 3 组 + 视频提示词、水仙对称柱廊、第四篇 7 套天宫、第五篇云宫仙阙 6 组、多场景变量矩阵组合）见 `references/prompts.md`。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

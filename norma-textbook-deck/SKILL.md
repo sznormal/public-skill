@@ -195,3 +195,9 @@ afp_spec_target: bronze
 | # | 日期 | 章节 | 页数 | 配色 | 验证结论 / 偏差修正 |
 |---|---|---|---|---|---|
 | 1 | 2026-09-16 | 第10章 综合项目：虚拟机器人指令解析 | 25 | tech_dark_blue | 端到端跑通。偏差 3 处已回写 `modules/pitfalls.md`：①`border width` 须整数；②含 `<img>` 页提交后末尾多出重复页，需 `+xml-get` 核页数并 `+delete-slide` 删除；③`+xml-get` 输出是 JSON 包裹，须抽 `data.xml_presentation.content` 成纯 xml 再 lint。 |
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

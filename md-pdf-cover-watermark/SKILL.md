@@ -140,3 +140,9 @@ build/               # 中间产物：每章 HTML + 封面/正文 PDF
 
 **python-markdown 转 HTML → 自写 CDP 客户端让 Chrome 打印两趟（封面满页 + 正文带页脚）→ pypdf 合并 → 自写断言脚本验收。**
 不需要 playwright，不需要 LaTeX，不需要 LibreOffice。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

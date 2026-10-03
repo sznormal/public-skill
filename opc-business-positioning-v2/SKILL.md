@@ -247,3 +247,9 @@ agent_created: true
 - [positioning-card-spec.md](references/positioning-card-spec.md) — 一句话定位卡片 SVG 模板（Visualizer + HTML）
 - [quality-gate.md](references/quality-gate.md) — 输出质量检查与失败回退
 - [dry-run-cases.md](references/dry-run-cases.md) — 测试 Prompt 和模拟干跑
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

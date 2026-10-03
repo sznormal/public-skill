@@ -11,6 +11,8 @@ _bm_skillid_migration.json
 # ===== 第三方 skill（不属于本仓库自建范围）=====
 /academic-research-skills/
 /openmaic__skillhub/
+# MIT 协议，版权归 luoluoluo22，非自建；作者无权改其许可，故移出统一 NC 协议范围
+/jianying-editor/
 
 # ===== 构建产物 =====
 **/scripts/build/

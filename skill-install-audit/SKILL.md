@@ -53,3 +53,9 @@ python -c "import shutil,os; s=r'<src>'; d=os.path.expanduser(r'~/.workbuddy/ski
 
 ## 交付
 - 向用户汇报：审计分级结论 + 关键说明（如网络出口域名、删除作用域、运行前置依赖如 ffmpeg / 剪映专业版）。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

@@ -314,3 +314,9 @@ daemon 托管的 plugin 只能从 installed_plugins.json 记录的安装快照�
 
 
 **报告平台时的最小修法**：`resolveAvatarFallbackSeed` 内加 `typeof === "string"` 判定，或让 chip 入口统一走 `localizedExpertText()`；顺带对齐 `handleExpertTest`（detail-panel-expert-test）与 summon 链路的数据形状（前者 `...targetExpert` 原样展开，`assistant*` 保持对象）。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

@@ -112,3 +112,9 @@ PYTHONPATH="$HTMLDOCX_DIR" "$PY" -c "import sys;sys.path.insert(0,'$HTMLDOCX_DIR
 ## 交付约定
 
 转换成功即视为流水线终点。若任务要求「强制打开预览」，转换后立刻把 `.docx` 交给 `present_files`。
+
+---
+
+© 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
+版本许可说明：**自初始版本起**适用本协议。

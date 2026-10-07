@@ -3,6 +3,9 @@ name: norma-ssci-journal-selector
 version: 1.4.0
 agent_created: true
 description: "SSCI 选刊决策助手——AFP 式六步证据流：个人约束画像（Step 0）→ 论文指纹（Step 1，6 行模板）→ 候选池构建（Step 2，引文回溯 + 关键词检索）→ 3D 匹配打分（Topic/Method/Audience，0-5）+ 证据等级 E0–E3 + Desk Reject Risk（Step 3）→ 冲/稳/保投稿序列（Step 4）→ 对齐说明与投稿信（Step 5-6）。【双确认门 AFP 交互】：Gate G1 指纹生成后强制暂停、用户核对修正后才建候选池（硬门槛）；Gate G2 候选池生成后强制暂停、用户增删后才评估——与 norma-sci-journal-selection 同一闸门逻辑，把纠错成本最低的环节放在最前面。支持 PDF/DOCX/TXT 输入，产出 Excel 评分表 + Markdown 报告 + 投稿信草稿。Use when users ask for \"help me select SSCI journals\", \"journal recommendation\", \"where should I submit my paper\", or similar journal selection requests. 【触发隔离 / Trigger isolation】: 仅在用户已写完论文、需要确定 SSCI 投稿期刊时触发；投SCI 英文刊走 norma-sci-journal-selection；投中文核心走 norma-cn-core-journal-selection；写文献综述走 norma-lit-review；综述完成后做选题走 norma-topic-selection；纯查单个期刊影响因子或分区、纯润色英文、纯写论文正文均不触发。"
+partner: norma
+skill_type: independent
+afp_spec_target: silver
 ---
 
 # SSCI Journal Selector · SSCI 选刊助手
@@ -84,6 +87,13 @@ This skill implements a comprehensive 6-step evidence-based process for selectin
    - Step 4: Design submission sequence
    - Step 5: Write journal alignment statement
 
+╭─ 分阶段确认纪律（硬停总纲 · 不允许自动推进）───────────────╮
+│ 本 skill 为 AFP 式分阶段确认流程。凡正文标注「确认点 / Gate │
+│ / Hard Stop / 必须等用户确认」的节点，AI 一律【不允许自动   │
+│ 推进】：未收到用户明确确认，不得进入该节点之后的任何阶段   │
+│ 或产出最终结论。用户可随时回退（Next / Back / Edit / 回阶段）。│
+╰──────────────────────────────────────────────────────────╯
+
 ## The 6-Step Process
 
 > **确认闸门（Confirmation Gates）说明 —— v1.1.0 核心改动**
@@ -118,6 +128,9 @@ Extract 6 key elements:
 
 可用 `references/prompt-templates.md` 的 **Prompt 1.1** 自动生成。
 
+╭─ 🛑 Gate G1（强制暂停 · 硬门槛）· 用户确认前不得进入 Step 2 ╮
+╰──────────────────────────────────────────────────────────────╯
+
 **🛑 Gate G1（强制暂停 · 硬门槛）**：生成指纹后**立刻停下**，请用户核对：
 - 展示完整 6 行指纹，问："这些判断准确吗？赛道、核心问题、方法有没有我识别错的？"
 - 用户修正时用 **Prompt 1.2**（Refine Paper Fingerprint）迭代，**以用户判断为准**。
@@ -128,6 +141,9 @@ Build 8-20 candidate journals using:
 - **Citation Backtracking**: Analyze your paper's reference list
 - **Keyword Search**: Use academic databases (Web of Science, Scopus)
 - **Merge and Rank**: Combine both approaches, remove duplicates
+
+╭─ 🛑 Gate G2（强制暂停）· 用户确认前不得进入 Step 3 ╮
+╰──────────────────────────────────────────────────────╯
 
 **🛑 Gate G2（强制暂停）**：候选池生成后停下，请用户增删：
 - 展示候选清单，问："有没有你听过想加的、或明确不投的？"

@@ -101,7 +101,7 @@
 
 ## 6. Windows / lark-cli 操作要点
 
-- python 用托管路径：`C:/Users/29206/.workbuddy/binaries/python/versions/3.13.12/python.exe`。
+- python 用托管路径：`C:/Users/admin/.workbuddy/binaries/python/versions/3.13.12/python.exe`。
 - 本机 bash 初始 PATH 不含标准 bin，命令前加 `export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"`。
 - lark-cli 的 `--output/--file/--slide` 只接受 CWD 内相对路径；先 cd 到工作目录。
 - 不在命令行内联 JSON；传结构先 Write 成文件再 `@file`。

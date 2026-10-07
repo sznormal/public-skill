@@ -2,6 +2,10 @@
 name: zhinengti-quan-format
 description: 当用户要求撰写或修改"智能体圈深度教程"系列飞书云文档时触发。严格按照 H1→H2→H3→H4 的中文编号格式规范处理文档标题层级，使用 lark-cli 操作飞书文档。触发词：用户说"智能体圈深度教程"。
 version: 1.0.0
+agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: bronze
 ---
 
 # 智能体圈深度教程 — 飞书云文档格式规范
@@ -129,8 +133,8 @@ lark-cli docs +fetch --api-version v2 --doc "<url>" --scope outline --max-depth 
 
 | 类型 | 固定路径 | 用途 | 对齐 |
 |------|---------|------|------|
-| 封面图 | `D:\user\download\AI智能体创富圈头图.png` | 文档开头唯一一张 | center, width=980 |
-| 跨栏图片 | `D:\user\download\跨栏图片.PNG` | 每章之间分隔 | center, width=980 |
+| 封面图 | `assets/AI智能体创富圈头图.png` | 文档开头唯一一张 | center, width=980 |
+| 跨栏图片 | `assets/跨栏图片.PNG` | 每章之间分隔 | center, width=980 |
 
 **注意**：封面图只在第一个 H1 前放一次；跨栏图片在第二~最后一个 H1（含附录）前各放一次。
 
@@ -141,8 +145,8 @@ lark-cli docs +fetch --api-version v2 --doc "<url>" --scope outline --max-depth 
 将固定路径的封面图和跨栏图片复制到当前工作目录（lark-cli 要求文件位于工作目录下）：
 
 ```bash
-cp "D:/user/download/AI智能体创富圈头图.png" "<工作目录>/AI智能体创富圈头图.png"
-cp "D:/user/download/跨栏图片.PNG" "<工作目录>/跨栏图片.PNG"
+cp "assets/AI智能体创富圈头图.png" "<工作目录>/AI智能体创富圈头图.png"
+cp "assets/跨栏图片.PNG" "<工作目录>/跨栏图片.PNG"
 ```
 
 **这些图片路径是固定的，不要使用其他图片或尝试重新生成。**

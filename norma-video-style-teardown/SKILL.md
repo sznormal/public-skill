@@ -1,8 +1,12 @@
 ---
 name: norma-video-style-teardown
 description: 拆解一支参考视频的「结构 / 风格 / 渲染 / 动画转场 / 文案」，产出可直接套拍的复刻规格。当用户上传或指向一个视频文件（.mp4/.mov/.mkv 等）并说「分析这个视频的风格」「拆解结构」「我要套用这个风格做视频」「拉片」时使用。不依赖 ffmpeg——用 OpenCV(自带解码)抽帧、PyAV 取音频、faster-whisper 本地转写。
+【触发隔离】：只处理「参考视频 → 可复刻风格规格」这一单点分析任务。用户要做的是视频剪辑/混剪/配音/生成新视频、或只要视频文字稿/字幕整理而不做风格拉片时，本 skill 不触发——那走通用视频制作/转写能力。
 version: 1.0.0
 agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: bronze
 ---
 
 # 视频风格拉片（Video Style Teardown）
@@ -14,9 +18,9 @@ agent_created: true
 本机 **没有 ffmpeg**，且 Git Bash 缺 `head/tail/which/ls` 等命令（不要用管道）。走托管 Python：
 
 ```bash
-PY=C:/Users/29206/.workbuddy/binaries/python/versions/3.13.12/python.exe
-$PY -m venv C:/Users/29206/.workbuddy/binaries/python/envs/video-analysis
-VPY=C:/Users/29206/.workbuddy/binaries/python/envs/video-analysis/Scripts/python.exe
+PY=C:/Users/admin/.workbuddy/binaries/python/versions/3.13.12/python.exe
+$PY -m venv C:/Users/admin/.workbuddy/binaries/python/envs/video-analysis
+VPY=C:/Users/admin/.workbuddy/binaries/python/envs/video-analysis/Scripts/python.exe
 $VPY -m pip install opencv-python-headless numpy av faster-whisper
 ```
 

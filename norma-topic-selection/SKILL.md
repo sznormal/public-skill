@@ -3,6 +3,9 @@ name: norma-topic-selection
 description: "理工科研究生选题助手——从已完成文献综述到研究空白识别、双轴定位、六重门验伪、选题定型、可发表性评分、MVP 止损与研究计划制定的分阶段交互流。内置 8 类空白归型 + 竞争地形四区矩阵 + 六重验伪门 + 带一票否决的 8 维评分卡 + 交付物模板与体检脚本。触发词覆盖：选题、找研究空白、研究空白、研究缺口、这个方向有没有空白、开题选题、研究生选题、论文选题、选题评估、这个题好不好做、能不能发、研究计划、开题报告、gap analysis、research gap、topic selection。【触发隔离】：仅在用户已完成或正在做文献综述、需要确定研究选题时触发；尚未开始综述走 norma-lit-review；论文写完要投哪本刊走 norma-sci-journal-selection / cn-core-journal-selection；单纯文献检索本身不触发。"
 version: 1.0.0
 agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: silver
 ---
 
 # 理工科选题助手
@@ -37,6 +40,13 @@ agent_created: true
   "history": { "completed_stages": [], "artifacts_saved": [] }
 }
 ```
+
+╭─ 分阶段确认纪律（硬停总纲 · 不允许自动推进）───────────────╮
+│ 本 skill 为 AFP 式分阶段确认流程。凡正文标注「确认点 / Gate │
+│ / Hard Stop / 必须等用户确认」的节点，AI 一律【不允许自动   │
+│ 推进】：未收到用户明确确认，不得进入该节点之后的任何阶段   │
+│ 或产出最终结论。用户可随时回退（Next / Back / Edit / 回阶段）。│
+╰──────────────────────────────────────────────────────────╯
 
 ## 8 阶段路由（每阶段 Hard Stop 确认）
 

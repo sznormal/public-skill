@@ -63,7 +63,7 @@ open('server.xml','w',encoding='utf8').write(d['data']['xml_presentation']['cont
 **根因**：本机无 `python3`，且系统 python 未装 python-pptx。
 
 **修法**：统一用托管路径
-`C:/Users/29206/.workbuddy/binaries/python/versions/3.13.12/python.exe`。
+`C:/Users/admin/.workbuddy/binaries/python/versions/3.13.12/python.exe`。
 解析 pptx 用**零依赖**脚本（`zipfile` + `xml.etree.ElementTree`），不依赖 python-pptx。
 
 ---

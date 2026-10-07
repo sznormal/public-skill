@@ -2,6 +2,10 @@
 name: norma-skills-publish
 description: 将单个 WorkBuddy skill 推送到 sznormal/norma-skills（GitHub + Gitee 双远端 monorepo）。当用户要把自建 skill 发布/同步到 norma-skills 仓库，或说"推送 skill""发布到 gitee/github""同步 norma-skills""把 skill 入库"时触发。
 version: 1.0.0
+agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: bronze
 ---
 
 # norma-skills 双远端发布（norma-skills-publish）

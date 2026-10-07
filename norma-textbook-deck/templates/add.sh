@@ -5,8 +5,8 @@
 
 export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
 
-PY="C:/Users/29206/.workbuddy/binaries/python/versions/3.13.12/python.exe"
-LINT="C:/Users/29206/.workbuddy/connectors/skills/connector-feishu/lark-slides/scripts/xml_lint.py"
+PY="C:/Users/admin/.workbuddy/binaries/python/versions/3.13.12/python.exe"
+LINT="C:/Users/admin/.workbuddy/connectors/skills/connector-feishu/lark-slides/scripts/xml_lint.py"
 # 改成当前 deck 的 xml_presentation_id
 PRES="${PRES:-Te2JsP5ymlbz7Hdp33vcvLIEnPf}"
 

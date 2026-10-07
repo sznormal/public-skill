@@ -1,8 +1,12 @@
 ---
 name: school-news-oa-writer
 description: 按学校 OA 投稿规范，把一次校园活动/培训/竞赛/会议信息生成可直接复制进 OA 的 Word 新闻稿。内置字数分级（默认一般新闻≤200字/配图1张）、Word 排版（小四宋体、行距固定值24磅、段前段后0）、norma 行文偏好（中德机器人学院前置、点明嵌入式技术专业教师、用具体日期、落款无逗号版）与 python-docx 生成+自检模板。适用于用户说"写学校新闻稿""OA发稿""培训新闻""学校新闻报道""新闻通稿""帮我写个培训报道"等场景。
+【触发隔离】：只处理「校园活动/培训/竞赛/会议 → OA 投稿 Word 新闻稿」这一单点任务。用户要做的是公众号推文/自媒体文案、学术论文/报告、或纯新闻素材整理而不投稿 OA 时，本 skill 不触发——那走通用写作能力。
 version: 1.0.0
 agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: bronze
 ---
 
 # 学校新闻 OA 发稿

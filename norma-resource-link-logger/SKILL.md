@@ -7,6 +7,9 @@ description: 把链接（GitHub 仓库、网页、教程、论文、视频等）
 description_zh: 把链接（GitHub 仓库、网页、教程、论文、视频等）记录到 Norma 的资源分享链接库（金山文档智能表格）。触发说法包括"记个链接""记录 + 网址""收一下 + 网址""存 + 网址""加到资源库""收藏这个网页""这些链接都记一下"，用户只给 URL 不写说明时同样触发。自动查重、按链接类型抓取元数据与简介、判断分类、追加行、回读验证，支持一次给多个链接的批量导入。
 description_en: Log links (GitHub repos, web pages, tutorials, papers, videos) into Norma's resource-sharing sheet (WPS/Kdocs online spreadsheet). Triggers on "save this link", "record <url>", "add <url> to my resource library", "bookmark <url>", or "log these links" for batch import; a bare URL with no description also triggers. Auto de-duplicates, fetches metadata by link type, classifies, appends rows, and reads back to verify.
 agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: bronze
 ---
 
 # 资源链接记录器

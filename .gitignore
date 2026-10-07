@@ -13,6 +13,11 @@ _bm_skillid_migration.json
 /openmaic__skillhub/
 # MIT 协议，版权归 luoluoluo22，非自建；作者无权改其许可，故移出统一 NC 协议范围
 /jianying-editor/
+# 以下 4 个为从市场安装的第三方 skill（_skillhub_meta.json 中 source=marketplace），非自建，不入库
+/bw-roadmap/
+/sci-paper-cn/
+/sci-paper-writing/
+/scientific-writing/
 
 # ===== 构建产物 =====
 **/scripts/build/

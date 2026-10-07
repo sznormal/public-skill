@@ -29,6 +29,7 @@ Norma 的自建 WorkBuddy Skill 集合（单体仓库 / monorepo）。
 |---|---|---|
 | `suit-sz-teaching-suite-norma` | 1.2.0 | 高校教学文件写作套件：闭环完成《课程标准》（含课程思政融入表）→ 教案 → 学期授课计划三类文档撰写，并对三份文件做版本 / 格式 / 内容 / 学时勾稽的督导一致性核查；内置空白模板、确定性渲染与回读校验脚本，产出版式可机器校验的 docx |
 | `norma-lit-review` | 0.23.0 | 理工科文献综述全流程：检索策略 → 多库检索 → 筛选分类 → 研究缺口 → 结构化综述 → 按目标期刊格式出第二语言版 |
+| `norma-paper-format-check` | 1.2.0 | 论文排版与投稿前检查：按目标刊官网 Author Instructions 提取硬约束（重点参考文献格式），覆盖 LaTeX/Word/PDF 三栈排版；含著者-年份制（biblatex/JAIR）四式引用修正经验；沉淀轻量引用标记方法论（从 Markdown 重跑不丢排版修正，去括号铁律）；脚本门禁 `verify_submission.py` 支持编号制（零孤儿/缺项/越界/连续）+ `--author-year` 反模式扫描，加人工复核双保险核对引用正确性与投稿就绪度 |
 | `norma-topic-selection` | 1.0.0 | 理工科选题助手（AFP 构建）：证据矩阵 → 双轴定位（8 类性质 × 四区地形）→ 六重门验伪 → Gap Statement 与可证伪假设 → 带一票否决的 8 维评分卡 → MVP 止损 → 研究计划与投稿策略；内容综合四版方案评估，附 7 份交付模板 + 2 个纯标准库体检脚本 |
 | `bibagent` | 1.0.0 | 科学文献错误引用(miscitation)检测智能体：五类引用错误分类 + Evidence Committee 机制 + 付费墙双分支验证，产出可追踪引用完整性报告 |
 | `norma-sci-journal-selection` | 1.5.0 | SCI 选刊决策七阶段交互流：论文画像 → 期刊偏好 → 竞争格局 → 候选池 → 硬排雷 → 匹配打分（证据等级 E0–E3 门槛 + 双维加权 + Desk Reject Risk）→ 冲/稳/保；IF/分区可列参考值但须四件套（数值+来源+查询日期+限制说明）且不计分；内置成品 Prompt 模板库 |
@@ -38,7 +39,7 @@ Norma 的自建 WorkBuddy Skill 集合（单体仓库 / monorepo）。
 | `textbook-review` | 1.0.0 | 技术教材出版规范四维审查（小白可执行性 / 技术严谨性 / 教学法有效性 / 出版规范性）+ 自动化预检脚本 |
 | `norma-textbook-deck` | 1.0.0 | 把教材 Markdown 章节稳定复现成飞书教学课件 + PPTX + 代码外置，科技深蓝风 |
 | `textbook-deck-dark-blue` | 1.0.0 | 教材章节 → 教学课件，默认科技深蓝风，重流程/图示/对比，正文不贴代码 |
-| `vocational-course-framework` | 1.0.0 | 职业本科智慧课程框架方法论，从政策依据到教材编写全流程 |
+| `norma-vocational-course-framework` | 1.0.0 | 职业本科智慧课程框架方法论，从政策依据到教材编写全流程（AFP-SPEC silver·provisional） |
 | `zhinengti-quan-format` | 1.0.0 | 智能体圈深度教程飞书文档标题层级规范（H1→H2→H3→H4 中文编号） |
 
 ### 三、内容创作
@@ -145,6 +146,7 @@ git push gitee  main --tags
 | skill | 适用起始版本 | 依据 |
 |---|---|---|
 | `norma-lit-review` | **自 v0.10.0 起** | 原为 GPL-3.0，因其允许商用与本仓库目标冲突而更换；v0.9.x 及更早为历史状态 |
+| `norma-paper-format-check` | **自初始版本起** | 首次公开发布即适用本协议 |
 | 其余 44 个自建 skill | **自初始版本起** | 首次公开发布即适用本协议 |
 
 **本许可仅约束作者后续发布的新版本。** 任何人已获得的旧版本许可不可撤销，作者无权收回；旧版本可继续按其原许可流转。

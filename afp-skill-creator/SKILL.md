@@ -1,20 +1,7 @@
 ---
 name: afp-skill-creator
-description: >
-  AFP 行动派共同体的元 skill：当用户需要基于 AFP 方法论创建/开发/贡献一个专业内容生产 skill 时使用本 skill。
-  AFP（Auto Flow Prompt）是**跨领域的通用内容生产方法论**，本 skill 引导用户在其领域内（学术研究、
-  咨询报告、法律、医疗、投研、媒体、产品、政策、教育、创作等）用 AFP 三支柱 + 薄路由 + 触发词隔离 +
-  AFP-SPEC 合规的方式做出真正符合 AFP 生态的 skill，并生成完整可用的 skill package。
-  【触发词覆盖】：创建 skill / 做一个 skill / 写 skill / 开发 skill / 贡献 skill / 
-                 帮我做一个学术 skill / 帮我做一个咨询 skill / 帮我做一个法律 skill / 
-                 帮我做一个投研 skill / 帮我做一个医疗 skill / 帮我做一个内容生产 skill / 
-                 帮我做一个 xxx 领域的 skill / AFP skill 怎么写 / 学 skill 开发 / 
-                 怎么做 AFP-compliant skill / 我想加入 AFP-shared-primitives / 
-                 skill 结构怎么设计 / skill 怎么打包
-  【触发隔离】：只在用户明确表达"要创建/做/写/开发/贡献/设计一个 skill"意图时触发。
-              用户使用现有 skill 完成任务、询问某个 skill 用法、做非 skill 开发的其他工作时，
-              **本 skill 不触发**。
-version: 0.4.0
+description: 基于 AFP 方法论创建/开发/贡献专业内容生产 skill 的元 skill。引导用户在学术/咨询/法律/医疗/投研/媒体/产品/政策/教育/创作等领域，用 AFP 三支柱+薄路由+触发词隔离+AFP-SPEC 合规做出符合生态的 skill 并生成完整 package。【触发词】创建/做/写/开发/贡献 skill、AFP skill 怎么写、怎么做 AFP-compliant skill、skill 结构怎么设计、skill 怎么打包
+version: 0.6.0
 agent_created: true
 ---
 
@@ -129,6 +116,7 @@ agent_created: true
 | "审查一下" / "我这 skill 有什么问题" | `modules/review-theater.md` |
 | "反模式清单" / "skill 设计有什么坑" | `modules/skill-anti-patterns.md`（通用 20 条）+ 用户当前领域的 domain 模块（领域专属 10-15 条） |
 | "怎么做断点续传" / "抗压缩协议" | `modules/continuation-protocol.md` |
+| "怎么做阶段仪表盘/进度看板/回退" / "阶段控制台" | `modules/stage-console.md` |
 
 ## 首次上手（触发后立即输出）
 
@@ -195,7 +183,7 @@ AFP（Auto Flow Prompt）是一种通用的内容生产方法论。AFP-ecosystem
 | 指令 | 功能 |
 |------|------|
 | `Next` | 确认当前阶段完成，进入下一步 |
-| `Back` | 回到上一阶段修改 |
+| `Back` | 回到指定阶段修改（恢复快照+回写HUD，见阶段控制台；默认 dry-run；**回退后提醒重走后续流程**） |
 | `Edit <字段>=<新值>` | 修改状态字段 |
 | `Skip` | 跳过可选阶段 |
 | `Export` | 导出当前所有 artifact |
@@ -204,7 +192,7 @@ AFP（Auto Flow Prompt）是一种通用的内容生产方法论。AFP-ecosystem
 | `再深入一点` | 循环深化（What → Why → How → SoWhat → WhatElse） |
 | `反模式检查` | 加载通用 20 条 + 用户所在领域的 10-15 条领域反模式 |
 | `换领域` | 重新走 P1 领域识别（如果用户想跨领域做另一个 skill） |
-| `Status` | 输出当前 HUD 状态 |
+| `Status` | 渲染阶段仪表盘（见阶段控制台） |
 | `Continue` | 跨对话续跑（从磁盘恢复状态） |
 
 ## 断点续传（跨对话抗压缩）
@@ -229,6 +217,8 @@ AFP（Auto Flow Prompt）是一种通用的内容生产方法论。AFP-ecosystem
 ╰──────────────────────────────────────────╯
 ```
 
+> 每阶段完成卡之后**必须紧跟渲染一次阶段仪表盘**（见 `modules/stage-console.md`），让用户一眼看到整条流水线 P1–P9 的进度与当前所处位置；`Back` 回退遵循该模块的快照+回写协议（默认 dry-run，确认后执行）。
+
 ## 反模式警告（内嵌 10 条精选，完整清单按需 Read）
 
 创建 skill 时避免：
@@ -240,6 +230,7 @@ AFP（Auto Flow Prompt）是一种通用的内容生产方法论。AFP-ecosystem
 - ❌ 未做触发词隔离
 - ❌ 未做 AFP-SPEC 合规检查
 - ❌ 缺少状态管理 + 断点续传（Pattern 5 下跨 skill 状态传递必须走磁盘持久化）
+- ❌ **流水线 skill 无「阶段仪表盘 + 结果台账 + 回退」控制**——用户看不到整条流水线进度、每阶段决策无留痕、出错退不回；多阶段 Hard Stop 流程必须带阶段控制台（见 `modules/stage-console.md`）。仪表盘每行必须附「≤10 字阶段小结」，回退后必须提醒用户重走后续流程——二者缺一不可。
 - ❌ **关键步骤产物不落盘**（实质产出只在对话里显示、没写成具名文件）——违反落盘思维（理念 6），做不到可复用 / 可交接 / 可复现；判据：换个全新对话只凭磁盘文件能不能接着干。注意与上一条区分：状态续传为断点恢复，产物落盘为成资产，缺一不可
 - ❌ 决策点未 Hard Stop（agent 越权自主推进）
 - ❌ 输出无结构（违反 §7 Output Structure）
@@ -282,7 +273,7 @@ AFP（Auto Flow Prompt）是一种通用的内容生产方法论。AFP-ecosystem
 
 *本 skill 本身就是 Pattern 5 的 Independent skill 实例——教你做 Pattern 5，自己也是 Pattern 5。*
 
-*版本：v0.4（九阶段全通版）· 2026-07-23*
+*版本：v0.6（阶段控制台增强：仪表盘每行附 ≤10 字阶段小结 + 回退后提醒重走后续流程）· 2026-10-07*
 *维护者：AFP 行动派 Steering Committee（一平 + 学君 + 首批合伙人代表）*
 
 ---

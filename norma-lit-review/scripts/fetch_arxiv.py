@@ -1,17 +1,10 @@
 #!/usr/bin/env python3
 # norma-lit-review · arXiv 元数据检索与核验脚本
-# Copyright (C) 2026 Norma
+# Copyright (C) 2026 Norma（郑洪英）
 #
-# This program is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation, either version 3 of the License, or (at your
-# option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details:
-# <https://www.gnu.org/licenses/>.
+# 本脚本依据 PolyForm Noncommercial License 1.0.0 分发（禁止商业使用）。
+# 完整条款见本 skill 根目录 LICENSE 文件，或
+# https://polyformproject.org/licenses/noncommercial/1.0.0
 """arXiv 元数据检索与核验（仅 stdlib，无需 API key，带限速）。
 
 三个子命令

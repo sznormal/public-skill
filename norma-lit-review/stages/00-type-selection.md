@@ -130,7 +130,7 @@
 ## 六、产出物
 
 - `{project_path}/outputs/lit-review/type_profile.md`
-- 更新 HUD：`review_type`、`type_profile_path`、`meta.current_stage = "P1"`
+- 按 SKILL.md「阶段控制台·五」收尾：写产物 → 记台账（`log --stage P0 --decision "用户确认类型=Tn"`）→ 快照（`snapshot --stage P0`）→ 更新 HUD（`review_type`、`type_profile_path`、`meta.current_stage = "P1"`）→ 渲染仪表盘 → 输出 Hard Stop 卡
 
 ---
 

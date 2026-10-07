@@ -74,7 +74,7 @@
 ### 步骤 5 · 落盘与状态
 - 修订版覆盖或另存为 `literature_review_submission_zh.md`（投稿就绪版，建议另存以保留 v0.4 终稿）。
 - `response_letter.md` 一并落盘。
-- 更新 HUD：`current_stage=P9`、`revision.*` 字段、`history.completed_stages` 加 P9。
+- 按 SKILL.md「阶段控制台·五」收尾：写产物（`literature_review_submission_zh.md` / `response_letter.md`）→ 记台账（`log --stage P9 --decision "修订闭环/部分闭环项"`）→ 快照（`snapshot --stage P9`）→ 更新 HUD（`current_stage=P9`、`revision.*` 字段、`history.completed_stages` 加 P9）→ 渲染仪表盘 → 输出 Hard Stop 卡。
 - 输出硬停止卡（见 SKILL.md 通用格式）。
 
 ---

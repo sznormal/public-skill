@@ -1,8 +1,0 @@
-{
-  "name": "etf-three-lights",
-  "version": "6.0",
-  "installedAt": 1784785124415,
-  "updatedAt": "2026-07-23",
-  "source": "userImport",
-  "changes": "v6.0: 量价四象限/滚动累计跌幅/ADX趋势强度/金叉确认期/条件3修复"
-}

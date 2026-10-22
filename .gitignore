@@ -1,28 +1,5 @@
-# ===== WorkBuddy 运行时状态（非内容，勿提交）=====
-.*_migration.json
-_bm_skillid_migration.json
-
-# ===== 打包产物（可重新生成）=====
+# ===== 打包产物 =====
 *.zip
-
-# 例外：legacy/ 归档中的历史版本包需要入库留档
-!**/legacy/*.zip
-
-# ===== 第三方 skill（不属于本仓库自建范围）=====
-/academic-research-skills/
-/openmaic__skillhub/
-# MIT 协议，版权归 luoluoluo22，非自建；作者无权改其许可，故移出统一 NC 协议范围
-/jianying-editor/
-# 以下 4 个为从市场安装的第三方 skill（_skillhub_meta.json 中 source=marketplace），非自建，不入库
-/bw-roadmap/
-/sci-paper-cn/
-/sci-paper-writing/
-/scientific-writing/
-
-# ===== 构建产物 =====
-**/scripts/build/
-**/build/
-**/dist/
 
 # ===== Python =====
 __pycache__/
@@ -31,13 +8,9 @@ __pycache__/
 .venv/
 venv/
 
-# ===== Node =====
-node_modules/
-
 # ===== 系统与编辑器 =====
 .DS_Store
 Thumbs.db
-desktop.ini
 .idea/
 .vscode/
 

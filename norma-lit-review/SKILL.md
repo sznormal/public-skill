@@ -1,8 +1,14 @@
 ---
 name: norma-lit-review
-version: 0.26.0
+version: 0.27.0
 description: Norma的理工科文献综述skill——帮助职教本科/应用型本科理工教师完成从检索策略设计、多库检索、文献筛选分类、研究缺口分析到结构化综述撰写的全流程文献调研。【触发词覆盖】：文献综述 / 写综述 / 做文献综述 / STEM综述 / 理工科综述 / 文献调研 / 帮我梳理文献 / 写literature review / 搜文献 / 找文献 / 文献分析 / 研究现状【触发隔离】：只在用户明确要求"写综述/梳理文献/文献调研/搜文献"时触发。讨论选题、写论文其他部分、日常聊天时不触发。
 agent_created: true
+partner: norma
+skill_type: independent
+afp_spec_target: silver
+author: Norma
+email: 2920680@qq.com
+license: MIT
 ---
 
 # Norma理工科文献综述
@@ -340,7 +346,7 @@ AFP-SPEC 要求流水线 skill 自带「状态管理 + 断点续传」，但光�
 ### 三、本地标识零泄漏
 - 本 skill 不写任何绝对路径、本机用户名（如 Windows 用户目录、Linux 家目录）、机器名到产物或日志；
   状态文件 `hud_state.json` / `stage_ledger.json` 只存相对项目路径与阶段状态。
-- 脚本许可头与根 `LICENSE`（PolyForm Noncommercial 1.0.0）一致；内部历史档（`legacy/`）不随包分发。
+- 脚本许可头与本文件声明一致（**MIT License**）；内部历史档（`legacy/`）不随包分发。
 
 ## 版本记录
 
@@ -405,5 +411,27 @@ AFP-SPEC 要求流水线 skill 自带「状态管理 + 断点续传」，但光�
 *维护者：Norma*
 
 © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
-依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
-版本许可说明：**自 v0.10.0 起**适用本协议，v0.9.x 及更早版本为历史状态。
+依据 **MIT License** 授权（完整条款见下）· 可公开、可修改、可再分发，**允许商业使用**。
+版本许可说明：**自 v0.27.0 起**适用 MIT License；历史版本按其各自许可流转。
+
+MIT License
+
+Copyright (c) 2026 Norma（郑洪英）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

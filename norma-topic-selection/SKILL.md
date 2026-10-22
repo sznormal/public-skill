@@ -1,11 +1,14 @@
 ---
 name: norma-topic-selection
 description: "理工科研究生选题助手——从已完成文献综述到研究空白识别、双轴定位、六重门验伪、选题定型、可发表性评分、MVP 止损与研究计划制定的分阶段交互流。内置 8 类空白归型 + 竞争地形四区矩阵 + 六重验伪门 + 带一票否决的 8 维评分卡 + 交付物模板与体检脚本。触发词覆盖：选题、找研究空白、研究空白、研究缺口、这个方向有没有空白、开题选题、研究生选题、论文选题、选题评估、这个题好不好做、能不能发、研究计划、开题报告、gap analysis、research gap、topic selection。【触发隔离】：仅在用户已完成或正在做文献综述、需要确定研究选题时触发；尚未开始综述走 norma-lit-review；论文写完要投哪本刊走 norma-sci-journal-selection / cn-core-journal-selection；单纯文献检索本身不触发。"
-version: 1.0.0
+version: 1.1.0
 agent_created: true
 partner: norma
 skill_type: independent
 afp_spec_target: silver
+author: Norma
+email: 2920680@qq.com
+license: MIT
 ---
 
 # 理工科选题助手
@@ -142,5 +145,27 @@ afp_spec_target: silver
 ---
 
 © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
-依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
-版本许可说明：**自初始版本起**适用本协议。
+依据 **MIT License** 授权（完整条款见下）· 可公开、可修改、可再分发，**允许商业使用**。
+版本许可说明：**自 v1.1.0 起**适用 MIT License；历史版本按其各自许可流转。
+
+MIT License
+
+Copyright (c) 2026 Norma（郑洪英）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

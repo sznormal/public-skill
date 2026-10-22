@@ -1,11 +1,14 @@
 ---
 name: norma-sci-journal-selection
 description: "理工科论文写好后的 SCI 选刊决策助手——AFP 式七阶段交互流：论文画像扫描→期刊偏好采集（分区/IF区间/类型/OA/APC/速度/接收率，可量化加权）→竞争格局扫描与选题配对→候选池→硬排雷→匹配打分（证据等级E0–E3门槛+双维打分+Desk Reject Risk）→冲/稳/保三档梯度。每阶段产出落盘+用户确认点，内置 2026 分区换表情报、On Hold/预警排雷与成品 Prompt 模板库。触发词覆盖：SCI选刊、选刊、怎么选期刊、投稿选刊、期刊选择、论文投哪本、帮我选个期刊、投哪个期刊、journal selection。【触发隔离】：仅在用户已写好论文、需要确定投稿期刊时触发；写文献综述走 norma-lit-review；纯查单个期刊影响因子、写论文正文、润色英文时不触发。"
-version: 1.5.0
+version: 1.6.0
 agent_created: true
 partner: norma
 skill_type: independent
 afp_spec_target: silver
+author: Norma
+email: 2920680@qq.com
+license: MIT
 ---
 
 # SCI 选刊助手
@@ -319,5 +322,27 @@ afp_spec_target: silver
 ---
 
 © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
-依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
-版本许可说明：**自初始版本起**适用本协议。
+依据 **MIT License** 授权（完整条款见下）· 可公开、可修改、可再分发，**允许商业使用**。
+版本许可说明：**自 v1.6.0 起**适用 MIT License；历史版本按其各自许可流转。
+
+MIT License
+
+Copyright (c) 2026 Norma（郑洪英）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

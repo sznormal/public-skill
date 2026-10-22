@@ -1,11 +1,14 @@
 ---
 name: norma-paper-format-check
-version: 1.2.0
+version: 1.3.0
 description: 论文排版与投稿前检查专家——按目标期刊官网 Author Instructions 提取硬约束（重点：参考文献格式），覆盖 LaTeX/Word/PDF 三栈排版执行，并以脚本门禁 + 人工复核双保险核对引用正确性（零孤儿/缺项/越界）与投稿就绪度。【触发词覆盖】：论文排版 / 格式检查 / 投稿格式 / 参考文献格式 / 引用检查 / 期刊格式 / 排版规范 / 投稿前检查 / format check / reference format / 查格式 / 核对参考文献。【触发隔离】：只在用户明确要求"排版 / 格式检查 / 参考文献核对 / 投稿前检查"时触发；写综述正文走 norma-lit-review，选刊走 norma-sci-journal-selection / norma-ssci-journal-selector / norma-cn-core-journal-selection。
 agent_created: true
 partner: norma
 skill_type: independent
 afp_spec_target: silver
+author: Norma
+email: 2920680@qq.com
+license: MIT
 ---
 
 # 论文排版与投稿前检查（Norma 版）
@@ -107,5 +110,27 @@ afp_spec_target: silver
 *维护者：Norma*
 
 © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
-依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
-版本许可说明：**自初始版本起**适用本协议。
+依据 **MIT License** 授权（完整条款见下）· 可公开、可修改、可再分发，**允许商业使用**。
+版本许可说明：**自 v1.3.0 起**适用 MIT License；历史版本按其各自许可流转。
+
+MIT License
+
+Copyright (c) 2026 Norma（郑洪英）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

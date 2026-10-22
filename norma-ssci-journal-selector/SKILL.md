@@ -1,11 +1,14 @@
 ---
 name: norma-ssci-journal-selector
-version: 1.4.0
+version: 1.5.0
 agent_created: true
 description: "SSCI 选刊决策助手——AFP 式六步证据流：个人约束画像（Step 0）→ 论文指纹（Step 1，6 行模板）→ 候选池构建（Step 2，引文回溯 + 关键词检索）→ 3D 匹配打分（Topic/Method/Audience，0-5）+ 证据等级 E0–E3 + Desk Reject Risk（Step 3）→ 冲/稳/保投稿序列（Step 4）→ 对齐说明与投稿信（Step 5-6）。【双确认门 AFP 交互】：Gate G1 指纹生成后强制暂停、用户核对修正后才建候选池（硬门槛）；Gate G2 候选池生成后强制暂停、用户增删后才评估——与 norma-sci-journal-selection 同一闸门逻辑，把纠错成本最低的环节放在最前面。支持 PDF/DOCX/TXT 输入，产出 Excel 评分表 + Markdown 报告 + 投稿信草稿。Use when users ask for \"help me select SSCI journals\", \"journal recommendation\", \"where should I submit my paper\", or similar journal selection requests. 【触发隔离 / Trigger isolation】: 仅在用户已写完论文、需要确定 SSCI 投稿期刊时触发；投SCI 英文刊走 norma-sci-journal-selection；投中文核心走 norma-cn-core-journal-selection；写文献综述走 norma-lit-review；综述完成后做选题走 norma-topic-selection；纯查单个期刊影响因子或分区、纯润色英文、纯写论文正文均不触发。"
 partner: norma
 skill_type: independent
 afp_spec_target: silver
+author: Norma
+email: 2920680@qq.com
+license: MIT
 ---
 
 # SSCI Journal Selector · SSCI 选刊助手
@@ -307,5 +310,27 @@ This skill transforms the complex journal selection process into a systematic, e
 ---
 
 © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
-依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
-版本许可说明：**自初始版本起**适用本协议。
+依据 **MIT License** 授权（完整条款见下）· 可公开、可修改、可再分发，**允许商业使用**。
+版本许可说明：**自 v1.5.0 起**适用 MIT License；历史版本按其各自许可流转。
+
+MIT License
+
+Copyright (c) 2026 Norma（郑洪英）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

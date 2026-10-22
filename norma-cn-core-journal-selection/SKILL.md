@@ -1,11 +1,14 @@
 ---
 name: norma-cn-core-journal-selection
 description: "中文核心期刊选刊决策助手——AFP 式七阶段交互流：稿件画像扫描（含学科归属/栏目契合/时效）→ 期刊偏好采集（认定目录体系/学科类目/见刊时限/版面费/发文类型，可量化加权）→ 栏目与栏目级竞争扫描→候选池→五关排雷（含假刊/套刊/增刊/代发识别）→匹配打分→冲/稳/保三档梯度。每阶段产出落盘+用户确认点，内置四大核心目录体系（北大核心/CSSCI/CSCD/科技核心）与 2026 换届窗口情报。触发词覆盖：中文核心选刊、核心期刊选刊、投中文核心、北大核心选刊、北核、C刊、CSSCI选刊、CSCD选刊、科技核心选刊、评职称投核心、中文期刊投稿、这本期刊是不是核心、期刊避坑。【触发隔离】：仅在用户需要选择中文期刊（职称/毕业/项目认定）时触发；投英文 SCI 走 sci-journal-selection；写文献综述走 norma-lit-review；纯查某个期刊是否在核心目录、纯问影响因子不触发完整流程。"
-version: 1.0.0
+version: 1.1.0
 agent_created: true
 partner: norma
 skill_type: independent
 afp_spec_target: silver
+author: Norma
+email: 2920680@qq.com
+license: MIT
 ---
 
 # 中文核心期刊选刊助手
@@ -287,5 +290,27 @@ afp_spec_target: silver
 ---
 
 © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
-依据 **PolyForm Noncommercial License v1.0.0** 授权（完整条款见仓库根目录 `LICENSE`）· 可公开、可修改、可再分发，**禁止商业使用**；教育机构教学使用属许可用途。
-版本许可说明：**自初始版本起**适用本协议。
+依据 **MIT License** 授权（完整条款见下）· 可公开、可修改、可再分发，**允许商业使用**。
+版本许可说明：**自 v1.1.0 起**适用 MIT License；历史版本按其各自许可流转。
+
+MIT License
+
+Copyright (c) 2026 Norma（郑洪英）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

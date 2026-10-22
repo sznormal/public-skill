@@ -1,6 +1,6 @@
 # public-skill
 
-Norma（郑洪英）公开的 6 个科研类 WorkBuddy Skill 集合。
+Norma 公开的 6 个科研类 WorkBuddy Skill 集合。
 
 每个 skill 独立目录，MIT License 授权允许商业使用。
 
@@ -67,4 +67,4 @@ public-skill/
 
 全部 skill 统一适用 **MIT License**（允许商业使用）。
 
-> © 2026 Norma（郑洪英）· 深圳信息职业技术大学 · 中德机器人学院
+> © 2026 Norma
